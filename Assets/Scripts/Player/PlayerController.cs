@@ -2,52 +2,96 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [Header("Movement Settings")]
-    [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float rotationSpeed = 10f;
+    [Header("Movement")]
+    [SerializeField] private float movementSpeed = 5f;
+    [SerializeField] private float rotationSmoothness = 10f;
 
-    private Camera _cam;
+    [Header("Interactions")]
+    [SerializeField] private Transform ingredientAttachmentPoint;
+    
+    private GameObject _heldIngredient;
+    private InteractableStation _activeStation;
+    private Camera _mainCamera;
+
+    void OnEnable()
+    {
+        InteractableStation.OnStationEnter += SetActiveStation;
+        InteractableStation.OnStationExit += ClearActiveStation;
+    }
+
+    void OnDisable()
+    {
+        InteractableStation.OnStationEnter -= SetActiveStation;
+        InteractableStation.OnStationExit -= ClearActiveStation;
+    }
 
     void Start()
     {
-        _cam = Camera.main;
+        _mainCamera = Camera.main;
     }
 
     void Update()
     {
-        HandleMovement();
+        ProcessMovement();
+        ProcessInteractionInput();
     }
 
-    private void HandleMovement()
+    private void SetActiveStation(InteractableStation station)
     {
-        // 1. Get raw input from WASD / Arrow Keys
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
+        _activeStation = station;
+        Debug.Log("Active Station being set : "+_activeStation);
+    }
 
-        Vector3 inputDir = new Vector3(horizontal, 0, vertical).normalized;
-        Debug.Log(inputDir);
-        if (inputDir.magnitude >= 0.1f)
+    private void ClearActiveStation(InteractableStation station)
+    {
+        if (_activeStation == station)
         {
-            // 2. Calculate the direction relative to the Camera's rotation
-            // We ignore the camera's X rotation (tilt) so the player stays on the floor
-            Vector3 camForward = _cam.transform.forward;
-            Vector3 camRight = _cam.transform.right;
+            _activeStation = null;
+            Debug.Log("Active Station being removed ");
+        }
+    }
 
-            camForward.y = 0;
-            camRight.y = 0;
+    private void ProcessInteractionInput()
+    {
+        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Space))
+        {
+            if (_activeStation != null)
+            {
+                ExecuteStationLogic();
+            }
+        }
+    }
 
-            camForward = camForward.normalized;
-            camRight = camRight.normalized;
+    private void ExecuteStationLogic()
+    {
+        if (_activeStation.type == StationType.Trash && _heldIngredient != null)
+        {
+            Destroy(_heldIngredient);
+            _heldIngredient = null;
+        }
+    }
 
-            // 3. Create the final movement vector
-            Vector3 moveDirection = (camForward * inputDir.z) + (camRight * inputDir.x);
+    private void ProcessMovement()
+    {
+        float horizontalInput = Input.GetAxisRaw("Horizontal");
+        float verticalInput = Input.GetAxisRaw("Vertical");
 
-            // 4. Apply movement
-            transform.position += moveDirection * moveSpeed * Time.deltaTime;
+        Vector3 rawDirection = new Vector3(horizontalInput, 0, verticalInput).normalized;
 
-            // 5. Smoothly rotate the player to face the direction of movement
-            Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        if (rawDirection.magnitude >= 0.1f)
+        {
+            Vector3 cameraForward = _mainCamera.transform.forward;
+            Vector3 cameraRight = _mainCamera.transform.right;
+
+            cameraForward.y = 0;
+            cameraRight.y = 0;
+
+            Vector3 worldMoveDirection = (cameraForward.normalized * rawDirection.z) + (cameraRight.normalized * rawDirection.x);
+
+            transform.position += worldMoveDirection * movementSpeed * Time.deltaTime;
+
+            Quaternion lookRotation = Quaternion.LookRotation(worldMoveDirection);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, rotationSmoothness * Time.deltaTime);
         }
     }
 }
