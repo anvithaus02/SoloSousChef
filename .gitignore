@@ -1,0 +1,15 @@
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Logs]/
+/[MemoryCaptures]/
+
+# Asset meta files are needed, but user-specific ones are not
+!/[Aa]ssets/**/*.meta
+/[Aa]ssets/AssetStoreTools*
+
+# Project settings that are user-specific
+/UserSettings/
+/ProjectSettings/ProjectVersion.txt
