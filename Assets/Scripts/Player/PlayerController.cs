@@ -9,16 +9,9 @@ public class PlayerController : MonoBehaviour
     [Header("Movement Settings")]
     [SerializeField] private float movementSpeed = 7f;
     [SerializeField] private float rotationSmoothness = 15f;
-    [SerializeField] private SpriteRenderer _itemInHand;
 
     private Ingredient _heldIngredient;
     private IInteractable _currentInteractable;
-    private Camera _mainCamera;
-
-    private void Awake()
-    {
-        _mainCamera = Camera.main;
-    }
 
     private void OnEnable()
     {
@@ -44,20 +37,16 @@ public class PlayerController : MonoBehaviour
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
 
-        Vector3 inputDirection = new Vector3(horizontal, 0, vertical).normalized;
+        // Use Y for vertical movement to move UP the screen background
+        Vector3 moveDirection = new Vector3(horizontal, vertical, 0).normalized;
 
-        if (inputDirection.magnitude >= 0.1f)
+        if (moveDirection.magnitude >= 0.1f)
         {
-            Vector3 cameraForward = _mainCamera.transform.forward;
-            Vector3 cameraRight = _mainCamera.transform.right;
+            transform.position += moveDirection * movementSpeed * Time.deltaTime;
 
-            cameraForward.y = 0;
-            cameraRight.y = 0;
-
-            Vector3 moveDirection = (cameraForward.normalized * inputDirection.z) + (cameraRight.normalized * inputDirection.x);
-            transform.position += moveDirection.normalized * movementSpeed * Time.deltaTime;
-
-            Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
+            // Rotation logic adjusted for 2D/2.5D plane
+            float targetAngle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg - 90f;
+            Quaternion targetRotation = Quaternion.Euler(0, 0, targetAngle);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSmoothness * Time.deltaTime);
         }
     }
@@ -79,7 +68,7 @@ public class PlayerController : MonoBehaviour
         {
             if (_currentInteractable is Refrigerator fridge)
             {
-                fridge.CycleSelection();
+               //fridge.CycleSelection();
             }
         }
     }
@@ -87,6 +76,7 @@ public class PlayerController : MonoBehaviour
     private void SetActiveInteractable(IInteractable interactable)
     {
         _currentInteractable = interactable;
+        Debug.Log("Trigger : ");
     }
 
     private void ClearActiveInteractable(IInteractable interactable)
@@ -97,11 +87,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // --- Public API for Interactables to use ---
-
     public void SetHeldIngredient(Ingredient ingredient)
     {
         _heldIngredient = ingredient;
+        _heldIngredient.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = 10;
         _heldIngredient.transform.SetParent(ingredientAttachmentPoint);
         _heldIngredient.transform.localPosition = Vector3.zero;
         _heldIngredient.transform.localRotation = Quaternion.identity;

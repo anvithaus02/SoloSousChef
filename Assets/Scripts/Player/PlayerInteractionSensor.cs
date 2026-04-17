@@ -1,30 +1,29 @@
 using UnityEngine;
 using System;
 
-[RequireComponent(typeof(Collider))]
 public class PlayerInteractionSensor : MonoBehaviour
 {
     public event Action<IInteractable> OnInteractableDetected;
     public event Action<IInteractable> OnInteractableLost;
 
-    private void OnTriggerEnter(Collider other)
+    // We use 2D here because the player is moving on the XY plane
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        IInteractable interactable = other.GetComponentInParent<IInteractable>();
-
+        Debug.Log("Physics2D Trigger detected something: " + other.name);
+        IInteractable interactable = other.GetComponent<IInteractable>();
         if (interactable != null)
         {
-            interactable.OnFocus();
             OnInteractableDetected?.Invoke(interactable);
+                    Debug.Log("Physics2D Invoked " + other.name);
+
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerExit2D(Collider2D other)
     {
-        IInteractable interactable = other.GetComponentInParent<IInteractable>();
-
+        IInteractable interactable = other.GetComponent<IInteractable>();
         if (interactable != null)
         {
-            interactable.OnDefocus();
             OnInteractableLost?.Invoke(interactable);
         }
     }
