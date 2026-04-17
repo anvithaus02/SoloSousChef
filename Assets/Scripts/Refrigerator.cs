@@ -3,35 +3,66 @@ using UnityEngine;
 
 public class Refrigerator : MonoBehaviour, IInteractable
 {
+    [Header("UI & Visuals")]
+    [SerializeField] private GameObject handsFullPrompt;
+    [SerializeField] private Transform previewSpawnPoint;
+
     [Header("Settings")]
     [SerializeField] private List<IngredientData> allIngredients;
     [SerializeField] private GameObject ingredientBasePrefab;
-    [SerializeField] private Transform previewSpawnPoint;
 
     private Ingredient _previewInstance;
     private int _selectedIndex = 0;
+    private bool _isFocused;
 
+    private void OnEnable()
+    {
+        ToggleHandsFullPrompt(false);
+    }
     public void OnFocus()
     {
-        // We still call this, but the method will now check the player
-        TryShowPreview();
+        _isFocused = true;
+        UpdateFridgeState();
     }
 
     public void OnDefocus()
     {
+        _isFocused = false;
         ClearPreview();
+        ToggleHandsFullPrompt(false);
+    }
+
+    private void Update()
+    {
+        if (_isFocused)
+        {
+            UpdateFridgeState();
+        }
+    }
+
+    private void UpdateFridgeState()
+    {
+        PlayerController player = FindObjectOfType<PlayerController>();
+        bool isPlayerFull = player != null && player.GetHeldIngredient() != null;
+
+        if (isPlayerFull)
+        {
+            ClearPreview();
+            ToggleHandsFullPrompt(true);
+        }
+        else
+        {
+            ToggleHandsFullPrompt(false);
+            TryShowPreview();
+        }
     }
 
     public void CycleSelection()
     {
-        if (allIngredients.Count == 0) return;
+        if (allIngredients.Count == 0 || _previewInstance == null) return;
 
         _selectedIndex = (_selectedIndex + 1) % allIngredients.Count;
-
-        if (_previewInstance != null)
-        {
-            _previewInstance.Initialize(allIngredients[_selectedIndex]);
-        }
+        _previewInstance.Initialize(allIngredients[_selectedIndex]);
     }
 
     public void Interact(PlayerController player)
@@ -45,25 +76,12 @@ public class Refrigerator : MonoBehaviour, IInteractable
 
     private void TryShowPreview()
     {
-        // Find the player in the scene to check their hands
-        // (Or pass the player reference through the Sensor if preferred)
-        PlayerController player = FindObjectOfType<PlayerController>();
+        if (_previewInstance != null || allIngredients.Count == 0) return;
 
-        if (player != null && player.GetHeldIngredient() != null)
-        {
-            // Player's hands are full, don't show anything
-            ClearPreview();
-            return;
-        }
-
-        if (_previewInstance == null && allIngredients.Count > 0)
-        {
-            GameObject go = Instantiate(ingredientBasePrefab, previewSpawnPoint);
-            go.transform.localPosition = Vector3.zero;
-
-            _previewInstance = go.GetComponent<Ingredient>();
-            _previewInstance.Initialize(allIngredients[_selectedIndex]);
-        }
+        GameObject go = Instantiate(ingredientBasePrefab, previewSpawnPoint);
+        go.transform.localPosition = Vector3.zero;
+        _previewInstance = go.GetComponent<Ingredient>();
+        _previewInstance.Initialize(allIngredients[_selectedIndex]);
     }
 
     private void ClearPreview()
@@ -72,6 +90,14 @@ public class Refrigerator : MonoBehaviour, IInteractable
         {
             Destroy(_previewInstance.gameObject);
             _previewInstance = null;
+        }
+    }
+
+    private void ToggleHandsFullPrompt(bool isVisible)
+    {
+        if (handsFullPrompt != null && handsFullPrompt.activeSelf != isVisible)
+        {
+            handsFullPrompt.SetActive(isVisible);
         }
     }
 }
