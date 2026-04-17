@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class ChoppingStationView : MonoBehaviour
+public class StationVisualController : MonoBehaviour
 {
-    [SerializeField] private TimerProgressBar progressBar;
     [SerializeField] private IngredientProcessor processor;
+    [SerializeField] private TimerProgressBar progressBar;
 
     private void OnEnable()
     {
@@ -17,15 +17,14 @@ public class ChoppingStationView : MonoBehaviour
         processor.OnProcessingComplete -= HandleProcessingComplete;
     }
 
-    private void Start()
-    {
-        ResetView();
-    }
-
     private void HandleProgressUpdate(float current, float max)
     {
-        progressBar.SetVisibility(true);
-        progressBar.UpdateTimer(current, max, TimerProgressBar.DisplayMode.Increasing);
+        if (!progressBar.gameObject.activeSelf)
+        {
+            progressBar.SetVisibility(true);
+        }
+
+        progressBar.UpdateTimer(current, max, TimerProgressBar.DisplayMode.Decreasing);
     }
 
     private void HandleProcessingComplete()
@@ -36,5 +35,6 @@ public class ChoppingStationView : MonoBehaviour
     public void ResetView()
     {
         progressBar.SetVisibility(false);
+        progressBar.UpdateTimer(0, 1, TimerProgressBar.DisplayMode.Decreasing);
     }
 }

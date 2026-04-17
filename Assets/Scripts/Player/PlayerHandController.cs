@@ -28,7 +28,6 @@ public class PlayerHandController : MonoBehaviour
 
     private void UpdateVisuals()
     {
-        Debug.Log("Anvitha Update Visuals "+(_heldData!=null));
         if (_heldData == null)
         {
             ingredientIcon.sprite = null;

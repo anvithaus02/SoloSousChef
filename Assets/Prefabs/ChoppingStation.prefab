@@ -232,8 +232,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   processor: {fileID: 3847270685014383385}
   stationView: {fileID: 507824884929212054}
-  itemSocket: {fileID: 8739545877101955017}
   ingredientPrefab: {fileID: 6296799255225434654, guid: 29d2c9fc406d60f4eb519cc46229aea5, type: 3}
+  itemSocket: {fileID: 8739545877101955017}
+  acceptedStationType: 1
 --- !u!114 &3847270685014383385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,8 +259,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e1f0cd1946c60b448011b2b8a5b77dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  progressBar: {fileID: 8264573137066897032}
   processor: {fileID: 3847270685014383385}
+  progressBar: {fileID: 8264573137066897032}
 --- !u!1001 &6122089640116394017
 PrefabInstance:
   m_ObjectHideFlags: 0

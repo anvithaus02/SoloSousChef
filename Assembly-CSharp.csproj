@@ -82,9 +82,10 @@
     <Compile Include="Assets\Scripts\Player\PlayerHandController.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerInteractionHandler.cs" />
     <Compile Include="Assets\Scripts\Generic\TimerProgressBar.cs" />
-    <Compile Include="Assets\Scripts\ChoppingStation\ChoppingStationView.cs" />
+    <Compile Include="Assets\Scripts\Station\StationVisualController.cs" />
     <Compile Include="Assets\Scripts\IngredientProcessor.cs" />
-    <Compile Include="Assets\Scripts\ChoppingStation\ChoppingStationHandler.cs" />
+    <Compile Include="Assets\Scripts\Station\ChoppingStationHandler.cs" />
+    <Compile Include="Assets\Scripts\Station\BaseStationHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
