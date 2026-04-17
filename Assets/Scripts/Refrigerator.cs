@@ -3,29 +3,22 @@ using UnityEngine;
 
 public class Refrigerator : MonoBehaviour, IInteractable
 {
-    [Header("Visuals")]
-    [SerializeField] private SpriteRenderer _itemDisplayPreview;
-
-    [Header("Data")]
+    [Header("Settings")]
     [SerializeField] private List<IngredientData> allIngredients;
     [SerializeField] private GameObject ingredientBasePrefab;
+    [SerializeField] private Transform previewSpawnPoint;
 
+    private Ingredient _previewInstance;
     private int _selectedIndex = 0;
-
-    private void Start()
-    {
-        ToggleDisplayVisibility(false);
-    }
 
     public void OnFocus()
     {
-        UpdatePreviewVisuals();
-        ToggleDisplayVisibility(true);
+        ShowPreview();
     }
 
     public void OnDefocus()
     {
-        ToggleDisplayVisibility(false);
+        ClearPreview();
     }
 
     public void CycleSelection()
@@ -33,44 +26,40 @@ public class Refrigerator : MonoBehaviour, IInteractable
         if (allIngredients.Count == 0) return;
 
         _selectedIndex = (_selectedIndex + 1) % allIngredients.Count;
-        UpdatePreviewVisuals();
-        
-        Debug.Log($"[FRIDGE] Selected: {allIngredients[_selectedIndex].ingredientName}");
+
+        if (_previewInstance != null)
+        {
+            _previewInstance.Initialize(allIngredients[_selectedIndex]);
+        }
     }
 
     public void Interact(PlayerController player)
     {
-        if (allIngredients.Count == 0) return;
-
-        if (player.GetHeldIngredient() == null)
+        if (_previewInstance != null && player.GetHeldIngredient() == null)
         {
-            SpawnAndGiveItem(player);
+            player.SetHeldIngredient(_previewInstance);
+            _previewInstance = null;
+            Debug.Log("[FRIDGE] Item handed to player.");
         }
     }
 
-    private void SpawnAndGiveItem(PlayerController player)
+    private void ShowPreview()
     {
-        GameObject instance = Instantiate(ingredientBasePrefab);
-        Ingredient ingredient = instance.GetComponent<Ingredient>();
-        
-        ingredient.Initialize(allIngredients[_selectedIndex]);
-        
-        player.SetHeldIngredient(ingredient);
+        if (_previewInstance != null) return;
+
+        GameObject go = Instantiate(ingredientBasePrefab, previewSpawnPoint);
+        go.transform.localPosition = Vector3.zero;
+
+        _previewInstance = go.GetComponent<Ingredient>();
+        _previewInstance.Initialize(allIngredients[_selectedIndex]);
     }
 
-    private void UpdatePreviewVisuals()
+    private void ClearPreview()
     {
-        if (allIngredients.Count > 0 && _itemDisplayPreview != null)
+        if (_previewInstance != null)
         {
-            _itemDisplayPreview.sprite = allIngredients[_selectedIndex].rawSprite;
-        }
-    }
-
-    private void ToggleDisplayVisibility(bool isVisible)
-    {
-        if (_itemDisplayPreview != null)
-        {
-            _itemDisplayPreview.gameObject.SetActive(isVisible);
+            Destroy(_previewInstance.gameObject);
+            _previewInstance = null;
         }
     }
 }
