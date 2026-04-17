@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\InteractableStation.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerInteractionSensor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

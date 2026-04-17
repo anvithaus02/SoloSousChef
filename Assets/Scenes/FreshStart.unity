@@ -228,13 +228,14 @@ GameObject:
   - component: {fileID: 13065136}
   - component: {fileID: 13065135}
   - component: {fileID: 13065134}
+  - component: {fileID: 13065138}
   m_Layer: 0
-  m_Name: Cylinder
+  m_Name: TrashCan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!136 &13065134
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -306,14 +307,27 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 13065133}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8, y: 1, z: 1.24}
+  m_LocalRotation: {x: 0, y: 0.92389584, z: 0, w: -0.3826441}
+  m_LocalPosition: {x: 4.0672398, y: 0, z: -9.884354}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &13065138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13065133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0bb9f4b34ee6b948976be469b5cc29e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 2
 --- !u!1 &444398436
 GameObject:
   m_ObjectHideFlags: 0
@@ -323,6 +337,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 444398438}
+  - component: {fileID: 444398439}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -346,6 +361,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &444398439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 444398436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d30b2218cffc5414fb847688bd0fad28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionSensor: {fileID: 801917431}
+  movementSpeed: 5
+  rotationSmoothness: 10
+  ingredientAttachmentPoint: {fileID: 801917425}
 --- !u!1 &801917424
 GameObject:
   m_ObjectHideFlags: 0
@@ -359,7 +390,7 @@ GameObject:
   - component: {fileID: 801917427}
   - component: {fileID: 801917426}
   - component: {fileID: 801917430}
-  - component: {fileID: 801917429}
+  - component: {fileID: 801917431}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Player
@@ -376,8 +407,8 @@ Transform:
   m_GameObject: {fileID: 801917424}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 444398438}
   m_RootOrder: 0
@@ -446,21 +477,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 801917424}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &801917429
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 801917424}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d30b2218cffc5414fb847688bd0fad28, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementSpeed: 20
-  rotationSmoothness: 10
-  ingredientAttachmentPoint: {fileID: 801917425}
 --- !u!54 &801917430
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -477,6 +493,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &801917431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 801917424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 229f348085e99504da98900ee11739f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1057151661
 GameObject:
   m_ObjectHideFlags: 0
@@ -491,7 +519,7 @@ GameObject:
   - component: {fileID: 1057151663}
   - component: {fileID: 1057151662}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Refridgerator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

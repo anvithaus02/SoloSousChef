@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Dependencies")]
+    [SerializeField] private PlayerInteractionSensor interactionSensor;
+
     [Header("Movement")]
     [SerializeField] private float movementSpeed = 5f;
     [SerializeField] private float rotationSmoothness = 10f;
@@ -13,24 +16,27 @@ public class PlayerController : MonoBehaviour
     private InteractableStation _activeStation;
     private Camera _mainCamera;
 
-    void OnEnable()
-    {
-        InteractableStation.OnStationEnter += SetActiveStation;
-        InteractableStation.OnStationExit += ClearActiveStation;
-    }
-
-    void OnDisable()
-    {
-        InteractableStation.OnStationEnter -= SetActiveStation;
-        InteractableStation.OnStationExit -= ClearActiveStation;
-    }
-
-    void Start()
+    private void Awake()
     {
         _mainCamera = Camera.main;
+        
+        if (interactionSensor == null)
+            interactionSensor = GetComponentInChildren<PlayerInteractionSensor>();
     }
 
-    void Update()
+    private void OnEnable()
+    {
+        interactionSensor.OnStationDetected += SetActiveStation;
+        interactionSensor.OnStationLost += ClearActiveStation;
+    }
+
+    private void OnDisable()
+    {
+        interactionSensor.OnStationDetected -= SetActiveStation;
+        interactionSensor.OnStationLost -= ClearActiveStation;
+    }
+
+    private void Update()
     {
         ProcessMovement();
         ProcessInteractionInput();
@@ -39,7 +45,7 @@ public class PlayerController : MonoBehaviour
     private void SetActiveStation(InteractableStation station)
     {
         _activeStation = station;
-        Debug.Log("Active Station being set : "+_activeStation);
+        Debug.Log($"Active Station: {_activeStation.name}");
     }
 
     private void ClearActiveStation(InteractableStation station)
@@ -47,7 +53,7 @@ public class PlayerController : MonoBehaviour
         if (_activeStation == station)
         {
             _activeStation = null;
-            Debug.Log("Active Station being removed ");
+            Debug.Log("Station cleared.");
         }
     }
 
@@ -87,7 +93,6 @@ public class PlayerController : MonoBehaviour
             cameraRight.y = 0;
 
             Vector3 worldMoveDirection = (cameraForward.normalized * rawDirection.z) + (cameraRight.normalized * rawDirection.x);
-
             transform.position += worldMoveDirection * movementSpeed * Time.deltaTime;
 
             Quaternion lookRotation = Quaternion.LookRotation(worldMoveDirection);
