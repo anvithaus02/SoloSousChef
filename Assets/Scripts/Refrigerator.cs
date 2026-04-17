@@ -13,7 +13,8 @@ public class Refrigerator : MonoBehaviour, IInteractable
 
     public void OnFocus()
     {
-        ShowPreview();
+        // We still call this, but the method will now check the player
+        TryShowPreview();
     }
 
     public void OnDefocus()
@@ -39,19 +40,30 @@ public class Refrigerator : MonoBehaviour, IInteractable
         {
             player.SetHeldIngredient(_previewInstance);
             _previewInstance = null;
-            Debug.Log("[FRIDGE] Item handed to player.");
         }
     }
 
-    private void ShowPreview()
+    private void TryShowPreview()
     {
-        if (_previewInstance != null) return;
+        // Find the player in the scene to check their hands
+        // (Or pass the player reference through the Sensor if preferred)
+        PlayerController player = FindObjectOfType<PlayerController>();
 
-        GameObject go = Instantiate(ingredientBasePrefab, previewSpawnPoint);
-        go.transform.localPosition = Vector3.zero;
+        if (player != null && player.GetHeldIngredient() != null)
+        {
+            // Player's hands are full, don't show anything
+            ClearPreview();
+            return;
+        }
 
-        _previewInstance = go.GetComponent<Ingredient>();
-        _previewInstance.Initialize(allIngredients[_selectedIndex]);
+        if (_previewInstance == null && allIngredients.Count > 0)
+        {
+            GameObject go = Instantiate(ingredientBasePrefab, previewSpawnPoint);
+            go.transform.localPosition = Vector3.zero;
+
+            _previewInstance = go.GetComponent<Ingredient>();
+            _previewInstance.Initialize(allIngredients[_selectedIndex]);
+        }
     }
 
     private void ClearPreview()
