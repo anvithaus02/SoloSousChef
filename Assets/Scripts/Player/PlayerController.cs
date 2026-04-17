@@ -5,6 +5,7 @@ public class PlayerController : MonoBehaviour
     [Header("Dependencies")]
     [SerializeField] private PlayerInteractionSensor interactionSensor;
     [SerializeField] private Transform ingredientAttachmentPoint;
+    [SerializeField] private SpriteRenderer _indredientIcon;
 
     [Header("Movement Settings")]
     [SerializeField] private float movementSpeed = 7f;
@@ -64,26 +65,35 @@ public class PlayerController : MonoBehaviour
 
     private void ProcessSelectionInput()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            if (_currentInteractable is Refrigerator fridge)
-            {
-               //fridge.CycleSelection();
-            }
-        }
+       
     }
 
     private void SetActiveInteractable(IInteractable interactable)
     {
+        // If we were already looking at something else, defocus it first
+        if (_currentInteractable != null && _currentInteractable != interactable)
+        {
+            _currentInteractable.OnDefocus();
+        }
+
         _currentInteractable = interactable;
-        Debug.Log("Trigger : "+_currentInteractable);
+
+        // Call OnFocus on the new object
+        if (_currentInteractable != null)
+        {
+            _currentInteractable.OnFocus();
+            Debug.Log("Focusing on: " + interactable.ToString());
+        }
     }
 
     private void ClearActiveInteractable(IInteractable interactable)
     {
         if (_currentInteractable == interactable)
         {
+            // Call OnDefocus before we lose the reference
+            _currentInteractable.OnDefocus();
             _currentInteractable = null;
+            Debug.Log("Lost focus.");
         }
     }
 

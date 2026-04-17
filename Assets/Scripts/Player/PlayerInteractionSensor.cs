@@ -12,15 +12,17 @@ public class PlayerInteractionSensor : MonoBehaviour
         if (interactable != null)
         {
             OnInteractableDetected?.Invoke(interactable);
+            interactable.OnFocus();
         }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        IInteractable interactable = other.GetComponentInChildren<IInteractable>();
+        IInteractable interactable = other.GetComponentInParent<IInteractable>();
         if (interactable != null)
         {
             OnInteractableLost?.Invoke(interactable);
+            interactable.OnDefocus();
         }
     }
 }
