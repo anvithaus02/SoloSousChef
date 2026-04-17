@@ -71,7 +71,7 @@
     <Compile Include="Assets\Scripts\TrashCan.cs" />
     <Compile Include="Assets\Scripts\KitchenEnums.cs" />
     <Compile Include="Assets\Scripts\ChoppingStation.cs" />
-    <Compile Include="Assets\Scripts\CookingStation.cs" />
+    <Compile Include="Assets\Scripts\CookingStationHandler.cs" />
     <Compile Include="Assets\Scripts\CookingStationManager.cs" />
     <Compile Include="Assets\Scripts\Fridge\FridgeCycleController.cs" />
     <Compile Include="Assets\Scripts\Fridge\FridgeInteractionHandler.cs" />
