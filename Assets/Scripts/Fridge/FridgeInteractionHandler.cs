@@ -51,13 +51,7 @@ public class FridgeInteractionHandler : MonoBehaviour, IInteractable
     private void SpawnAndGiveIngredient(PlayerController player)
     {
         IngredientData currentData = cycleController.GetCurrentIngredient();
-
-        GameObject obj = Instantiate(ingredientPrefab);
-        Ingredient ing = obj.GetComponent<Ingredient>();
-        ing.Initialize(currentData);
-
-        player.Hand.SetHeldItem(ing);
-
+        player.Hand.SetHeldItem(currentData, false);
         cycleController.StopCycle();
     }
 }

@@ -1,12 +1,15 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewIngredient", menuName = "Kitchen/Ingredient Data")]
+[CreateAssetMenu(fileName = "NewIngredient", menuName = "Kitchen/Ingredient")]
 public class IngredientData : ScriptableObject
 {
     public string ingredientName;
+    [Header("Raw State")]
     public Sprite rawSprite;
+    public StationType processingStation;
+    public float processingTime = 3f;
+
+    [Header("Processed State")]
     public Sprite processedSprite;
-    public int scoreValue; 
-    public StationType processingStation; 
-    public float processingTime; 
+    public string processedNameSuffix = " (Chopped)";
 }

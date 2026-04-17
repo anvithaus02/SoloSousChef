@@ -2,47 +2,41 @@ using UnityEngine;
 
 public class PlayerHandController : MonoBehaviour
 {
-    [SerializeField] private Transform attachmentPoint;
+    [SerializeField] private SpriteRenderer ingredientIcon;
     
-    private Ingredient _heldIngredient;
+    private IngredientData _heldData;
+    private bool _isProcessed;
 
-    public bool IsHandFull() => _heldIngredient != null;
+    public bool IsHandFull() => _heldData != null;
 
-    public void SetHeldItem(Ingredient ingredient)
+    public void SetHeldItem(IngredientData data, bool isProcessed)
     {
-        _heldIngredient = ingredient;
-        
-        // Ensure the sprite is visible above the player/background
-        SpriteRenderer sr = _heldIngredient.transform.GetChild(0).GetComponent<SpriteRenderer>();
-        if (sr != null) sr.sortingOrder = 10;
-
-        // Physical parenting
-        _heldIngredient.transform.SetParent(attachmentPoint);
-        _heldIngredient.transform.localPosition = Vector3.zero;
-        _heldIngredient.transform.localRotation = Quaternion.identity;
+        _heldData = data;
+        _isProcessed = isProcessed;
+        UpdateVisuals();
     }
 
-    public Ingredient GetHeldItem() => _heldIngredient;
+    public IngredientData GetHeldItemData() => _heldData;
+    public bool IsHeldItemProcessed() => _isProcessed;
 
-    public Ingredient ReleaseItem()
+    public void ClearHand()
     {
-        Ingredient releasedItem = _heldIngredient;
-        _heldIngredient = null;
-
-        if (releasedItem != null)
-        {
-            releasedItem.transform.SetParent(null);
-        }
-
-        return releasedItem;
+        _heldData = null;
+        _isProcessed = false;
+        UpdateVisuals();
     }
 
-    public void DestroyHeldItem()
+    private void UpdateVisuals()
     {
-        if (_heldIngredient != null)
+        Debug.Log("Anvitha Update Visuals "+(_heldData!=null));
+        if (_heldData == null)
         {
-            Destroy(_heldIngredient.gameObject);
-            _heldIngredient = null;
+            ingredientIcon.sprite = null;
+            ingredientIcon.enabled = false;
+            return;
         }
+
+        ingredientIcon.enabled = true;
+        ingredientIcon.sprite = _isProcessed ? _heldData.processedSprite : _heldData.rawSprite;
     }
 }

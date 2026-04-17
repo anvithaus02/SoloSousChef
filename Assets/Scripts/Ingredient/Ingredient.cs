@@ -1,29 +1,37 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Ingredient : MonoBehaviour
 {
-    [SerializeField] private SpriteRenderer _ingredientSprite;
+    [SerializeField] private Image _ingredientSprite;
     private IngredientData _data;
     private bool _isProcessed;
 
     public IngredientData Data => _data;
     public bool IsProcessed => _isProcessed;
 
-    public void Initialize(IngredientData newData)
+    public void Initialize(IngredientData data, bool isProcessed = false)
     {
-        _data = newData;
-        _isProcessed = false;
-        UpdateVisuals(false);
+        _data = data;
+        _isProcessed = isProcessed;
+
+        UpdateVisuals();
     }
 
     public void SetProcessed()
     {
         _isProcessed = true;
-        UpdateVisuals(true);
+        UpdateVisuals();
     }
 
-    private void UpdateVisuals(bool isProcessed)
+    private void UpdateVisuals()
     {
-        _ingredientSprite.sprite = isProcessed ? _data.processedSprite: _data.rawSprite;
+        if (_data == null) return;
+
+        _ingredientSprite.sprite = _isProcessed ? _data.processedSprite : _data.rawSprite;
+        
+        gameObject.name = _isProcessed 
+            ? _data.ingredientName + _data.processedNameSuffix 
+            : _data.ingredientName;
     }
 }
