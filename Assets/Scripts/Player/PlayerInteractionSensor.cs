@@ -10,7 +10,7 @@ public class PlayerInteractionSensor : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("Physics2D Trigger detected something: " + other.name);
-        IInteractable interactable = other.GetComponent<IInteractable>();
+        IInteractable interactable = other.GetComponentInChildren<IInteractable>();
         if (interactable != null)
         {
             OnInteractableDetected?.Invoke(interactable);
@@ -21,7 +21,7 @@ public class PlayerInteractionSensor : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        IInteractable interactable = other.GetComponent<IInteractable>();
+        IInteractable interactable = other.GetComponentInChildren<IInteractable>();
         if (interactable != null)
         {
             OnInteractableLost?.Invoke(interactable);

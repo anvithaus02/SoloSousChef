@@ -1,47 +1,30 @@
-using System.Collections;
 using UnityEngine;
+using System.Collections;
 
 public class TrashCan : MonoBehaviour, IInteractable
 {
-    [Header("Color Settings")]
-    [SerializeField] private Renderer _meshRenderer;
-    [SerializeField] private Color _defaultColor = Color.gray;
-    [SerializeField] private Color _hoverColor = Color.yellow;
-    [SerializeField] private Color _trashActionColor = Color.red;
-
-    private void Start()
-    {
-        SetColor(_defaultColor);
-    }
-
     public void OnFocus()
     {
-        SetColor(_hoverColor);
+        // This fires when the PlayerInteractionSensor first detects the 2D Trigger
+        Debug.Log("<color=yellow>Trash Can:</color> Player is in range.");
     }
 
     public void OnDefocus()
     {
-        SetColor(_defaultColor);
+        // This fires when the player walks away
+        Debug.Log("<color=yellow>Trash Can:</color> Player left range.");
     }
 
     public void Interact(PlayerController player)
     {
         if (player.GetHeldIngredient() != null)
         {
+            Debug.Log("<color=red>Trash Can:</color> Deleting item: " + player.GetHeldIngredient().name);
             player.DestroyHeldIngredient();
-            StartCoroutine(FlashTrashColor());
         }
-    }
-
-    private IEnumerator FlashTrashColor()
-    {
-        SetColor(_trashActionColor);
-        yield return new WaitForSeconds(0.5f);
-        SetColor(_hoverColor);
-    }
-
-    private void SetColor(Color color)
-    {
-        _meshRenderer.material.color = color;
+        else
+        {
+            Debug.Log("<color=white>Trash Can:</color> Interaction pressed, but hand is empty.");
+        }
     }
 }
