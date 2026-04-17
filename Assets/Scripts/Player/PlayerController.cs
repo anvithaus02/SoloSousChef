@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour
     private void SetActiveInteractable(IInteractable interactable)
     {
         _currentInteractable = interactable;
-        Debug.Log("Trigger : ");
+        Debug.Log("Trigger : "+_currentInteractable);
     }
 
     private void ClearActiveInteractable(IInteractable interactable)

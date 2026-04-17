@@ -71,6 +71,7 @@
     <Compile Include="Assets\Scripts\ProcessingStation.cs" />
     <Compile Include="Assets\Scripts\TrashCan.cs" />
     <Compile Include="Assets\Scripts\KitchenEnums.cs" />
+    <Compile Include="Assets\Scripts\ChoppingStation.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

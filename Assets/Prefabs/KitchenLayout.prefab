@@ -1,5 +1,55 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2816252753478271749
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4942654422581122485}
+  - component: {fileID: 3795106941974598284}
+  m_Layer: 5
+  m_Name: ChoppingTable
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &4942654422581122485
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2816252753478271749}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3710274213036718961}
+  m_Father: {fileID: 3710274213018594532}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -1212.36, y: -377.06}
+  m_SizeDelta: {x: 445.22, y: 271.36}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &3795106941974598284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2816252753478271749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3775336a46309fa4b8fa4cc025496ad0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3710274212430242704
 GameObject:
   m_ObjectHideFlags: 0
@@ -213,7 +263,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3710274213716215070}
-  - {fileID: 3710274213036718961}
+  - {fileID: 4942654422581122485}
   - {fileID: 3710274213214576391}
   - {fileID: 7886697691040190092}
   - {fileID: 8092565072674387988}
@@ -257,13 +307,13 @@ RectTransform:
   m_Children:
   - {fileID: 3710274214076669681}
   - {fileID: 5968574479914117575}
-  m_Father: {fileID: 3710274213018594532}
-  m_RootOrder: 1
+  m_Father: {fileID: 4942654422581122485}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1212.36, y: -377.06}
-  m_SizeDelta: {x: 445.22, y: 271.36}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3710274213036718972
 CanvasRenderer:
@@ -354,10 +404,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f8137d9867228441a0fc1cecac60c2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _meshRenderer: {fileID: 0}
-  _defaultColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _hoverColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  _trashActionColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &3710274213716215057
 GameObject:
   m_ObjectHideFlags: 0
@@ -446,7 +492,7 @@ GameObject:
   - component: {fileID: 3710274213865376518}
   - component: {fileID: 3710274213865376519}
   m_Layer: 5
-  m_Name: Collider
+  m_Name: TrashCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -547,7 +593,7 @@ GameObject:
   - component: {fileID: 3710274214076669681}
   - component: {fileID: 3710274214076669694}
   m_Layer: 5
-  m_Name: Collider
+  m_Name: ChoppingBoardCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -586,7 +632,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 28.512753}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -597,7 +643,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 445.22, y: 271.36}
+  m_Size: {x: 445.22, y: 214.33447}
   m_EdgeRadius: 0
 --- !u!1 &3710274214092462642
 GameObject:
