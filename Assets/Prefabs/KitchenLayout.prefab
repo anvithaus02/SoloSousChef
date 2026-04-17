@@ -59,7 +59,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3527190257703421848}
-  - component: {fileID: 2250715583822580832}
+  - component: {fileID: 6010995743637926930}
+  - component: {fileID: 2615807130451009435}
+  - component: {fileID: 2599445070514008931}
   m_Layer: 5
   m_Name: Refrigerator
   m_TagString: Untagged
@@ -90,7 +92,7 @@ RectTransform:
   m_AnchoredPosition: {x: -629.63947, y: -287.4}
   m_SizeDelta: {x: 312.81, y: 474.52}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2250715583822580832
+--- !u!114 &6010995743637926930
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -99,18 +101,44 @@ MonoBehaviour:
   m_GameObject: {fileID: 3603146687996427294}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 316a6316bc128ce419cb417ab0b80765, type: 3}
+  m_Script: {fileID: 11500000, guid: a079344647751914fa40f751570f230b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cycleController: {fileID: 2599445070514008931}
+  fridgeView: {fileID: 2615807130451009435}
+  ingredientPrefab: {fileID: 6296799255225434654, guid: 29d2c9fc406d60f4eb519cc46229aea5, type: 3}
   availableIngredients:
   - {fileID: 11400000, guid: d8e17858a936cd7428df1cbcfe678a71, type: 2}
   - {fileID: 11400000, guid: bf12445532f290a45a6436948cd84c3c, type: 2}
   - {fileID: 11400000, guid: 91edd53c1e535b240a8102ece2013e25, type: 2}
-  ingredientPrefab: {fileID: 6296799255225434654, guid: 29d2c9fc406d60f4eb519cc46229aea5, type: 3}
+  cycleDuration: 1
+--- !u!114 &2615807130451009435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3603146687996427294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27d85d8e4c8b82b4a89611b206312446, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   ingredientDisplayIcon: {fileID: 2223709309249560368}
   statusMessageText: {fileID: 2662106507930292607}
-  cycleDuration: 3
-  messageDuration: 1.5
+  fadeDuration: 0.5
+--- !u!114 &2599445070514008931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3603146687996427294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae8c2c1ba807cf94bb4f1a4bd69a2937, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3710274212816074814
 GameObject:
   m_ObjectHideFlags: 0
@@ -899,8 +927,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 16777215
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -976,7 +1004,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6353925217595679882
 RectTransform:
   m_ObjectHideFlags: 0
