@@ -11,39 +11,39 @@ public class ChoppingStation : MonoBehaviour, IInteractable
 
     public void Interact(PlayerController player)
     {
-        // PICK UP logic
-        if (_itemOnBoard != null && player.GetHeldIngredient() == null)
-        {
-            player.SetHeldIngredient(_itemOnBoard);
-            _itemOnBoard = null;
-            _isChopping = false;
-            Debug.Log("Picked up processed item.");
-            return;
-        }
+        // // PICK UP logic
+        // if (_itemOnBoard != null && player.GetHeldIngredient() == null)
+        // {
+        //     player.SetHeldIngredient(_itemOnBoard);
+        //     _itemOnBoard = null;
+        //     _isChopping = false;
+        //     Debug.Log("Picked up processed item.");
+        //     return;
+        // }
 
-        // PLACE logic
-        if (_itemOnBoard == null && player.GetHeldIngredient() != null)
-        {
-            Ingredient held = player.GetHeldIngredient();
+        // // PLACE logic
+        // if (_itemOnBoard == null && player.GetHeldIngredient() != null)
+        // {
+        //     Ingredient held = player.GetHeldIngredient();
 
-            // VALIDATION: Check StationType and current Processed state
-            if (held.Data.processingStation == StationType.Table && !held.IsProcessed)
-            {
-                _itemOnBoard = player.ReleaseHeldIngredient();
+        //     // VALIDATION: Check StationType and current Processed state
+        //     if (held.Data.processingStation == StationType.Table && !held.IsProcessed)
+        //     {
+        //         _itemOnBoard = player.ReleaseHeldIngredient();
                 
-                // Snap to board (Parent to the trigger object)
-                _itemOnBoard.transform.SetParent(this.transform);
-                _itemOnBoard.transform.localPosition = Vector3.zero;
+        //         // Snap to board (Parent to the trigger object)
+        //         _itemOnBoard.transform.SetParent(this.transform);
+        //         _itemOnBoard.transform.localPosition = Vector3.zero;
 
-                _currentTimer = 0;
-                _isChopping = true;
-                Debug.Log($"Chopping {held.Data.ingredientName}...");
-            }
-            else
-            {
-                Debug.Log("<color=red>Action Blocked:</color> This item cannot be chopped here.");
-            }
-        }
+        //         _currentTimer = 0;
+        //         _isChopping = true;
+        //         Debug.Log($"Chopping {held.Data.ingredientName}...");
+        //     }
+        //     else
+        //     {
+        //         Debug.Log("<color=red>Action Blocked:</color> This item cannot be chopped here.");
+        //     }
+        // }
     }
 
     private void Update()

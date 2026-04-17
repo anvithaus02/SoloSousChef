@@ -17,10 +17,10 @@ public class TrashCan : MonoBehaviour, IInteractable
 
     public void Interact(PlayerController player)
     {
-        if (player.GetHeldIngredient() != null)
+        if (player.Hand.GetHeldItem() != null)
         {
-            Debug.Log("<color=red>Trash Can:</color> Deleting item: " + player.GetHeldIngredient().name);
-            player.DestroyHeldIngredient();
+            Debug.Log("<color=red>Trash Can:</color> Deleting item: " + player.Hand.GetHeldItem().name);
+            player.Hand.DestroyHeldItem();
         }
         else
         {

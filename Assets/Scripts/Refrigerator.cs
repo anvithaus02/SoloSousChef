@@ -31,7 +31,7 @@ public class Refrigerator : MonoBehaviour, IInteractable
 
     public void OnFocus(PlayerController player)
     {
-        if (player.GetHeldIngredient() != null)
+        if (player.Hand.GetHeldItem() != null)
         {
             ShowStatusMessage("Hand Full!");
         }
@@ -50,7 +50,7 @@ public class Refrigerator : MonoBehaviour, IInteractable
     public void Interact(PlayerController player)
     {
         // 1. Check if Hand is Full
-        if (player.GetHeldIngredient() != null)
+        if (player.Hand.GetHeldItem() != null)
         {
             ShowStatusMessage("Hand Full!");
             return;
@@ -122,7 +122,7 @@ public class Refrigerator : MonoBehaviour, IInteractable
         Ingredient ing = obj.GetComponent<Ingredient>();
         ing.Initialize(availableIngredients[_currentIndex]);
 
-        player.SetHeldIngredient(ing);
+        player.Hand.SetHeldItem(ing);
 
         // Hide UI and stop cycling until they walk away and come back
         StopCycleTemporarily();

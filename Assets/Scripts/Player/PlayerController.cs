@@ -2,132 +2,55 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [Header("Dependencies")]
+    [Header("Sub-Modules")]
+    [SerializeField] private PlayerInputHandler inputHandler;
+    [SerializeField] private PlayerLocomotion locomotion;
+    [SerializeField] private PlayerInteractionHandler interactionHandler;
+    [SerializeField] private PlayerHandController handController;
     [SerializeField] private PlayerInteractionSensor interactionSensor;
-    [SerializeField] private Transform ingredientAttachmentPoint;
-    [SerializeField] private SpriteRenderer _indredientIcon;
-
-    [Header("Movement Settings")]
-    [SerializeField] private float movementSpeed = 7f;
-    [SerializeField] private float rotationSmoothness = 15f;
-
-    private Ingredient _heldIngredient;
-    private IInteractable _currentInteractable;
 
     private void OnEnable()
     {
-        interactionSensor.OnInteractableDetected += SetActiveInteractable;
-        interactionSensor.OnInteractableLost += ClearActiveInteractable;
+        // Subscribe to Sensor Events
+        interactionSensor.OnInteractableDetected += HandleDetection;
+        interactionSensor.OnInteractableLost += HandleLost;
+
+        // Subscribe to Input Events
+        inputHandler.OnInteractPressed += HandleInteractionRequest;
     }
 
     private void OnDisable()
     {
-        interactionSensor.OnInteractableDetected -= SetActiveInteractable;
-        interactionSensor.OnInteractableLost -= ClearActiveInteractable;
+        // Cleanup subscriptions to prevent memory leaks
+        interactionSensor.OnInteractableDetected -= HandleDetection;
+        interactionSensor.OnInteractableLost -= HandleLost;
+        inputHandler.OnInteractPressed -= HandleInteractionRequest;
     }
 
     private void Update()
     {
-        ProcessMovement();
-        ProcessInteractionInput();
-        ProcessSelectionInput();
+        // The Orchestrator drives the Locomotion using the Input data
+        // We pass the raw Vector2; Locomotion handles the speed/time math.
+        locomotion.Move(inputHandler.MovementInput);
     }
 
-    private void ProcessMovement()
+    private void HandleDetection(IInteractable interactable)
     {
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
-
-        // Use Y for vertical movement to move UP the screen background
-        Vector3 moveDirection = new Vector3(horizontal, vertical, 0).normalized;
-
-        if (moveDirection.magnitude >= 0.1f)
-        {
-            transform.position += moveDirection * movementSpeed * Time.deltaTime;
-
-            // Rotation logic adjusted for 2D/2.5D plane
-            float targetAngle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg - 90f;
-            Quaternion targetRotation = Quaternion.Euler(0, 0, targetAngle);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSmoothness * Time.deltaTime);
-        }
+        // Delegate the logic to the Interaction Handler
+        interactionHandler.HandleInteractableDetected(interactable, this);
     }
 
-    private void ProcessInteractionInput()
+    private void HandleLost(IInteractable interactable)
     {
-        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Space))
-        {
-            if (_currentInteractable != null)
-            {
-                _currentInteractable.Interact(this);
-            }
-        }
+        interactionHandler.HandleInteractableLost(interactable);
     }
 
-    private void ProcessSelectionInput()
+    private void HandleInteractionRequest()
     {
-
+        // When the InputHandler detects 'E', we tell the Interaction system to execute
+        interactionHandler.PerformInteraction(this);
     }
 
-    private void SetActiveInteractable(IInteractable interactable)
-    {
-        if (_currentInteractable != null && _currentInteractable != interactable)
-        {
-            _currentInteractable.OnDefocus();
-        }
-
-        _currentInteractable = interactable;
-
-        if (_currentInteractable != null)
-        {
-            _currentInteractable.OnFocus(this);
-        }
-    }
-
-    private void ClearActiveInteractable(IInteractable interactable)
-    {
-        if (_currentInteractable == interactable)
-        {
-            // Call OnDefocus before we lose the reference
-            _currentInteractable.OnDefocus();
-            _currentInteractable = null;
-            Debug.Log("Lost focus.");
-        }
-    }
-
-    public void SetHeldIngredient(Ingredient ingredient)
-    {
-        _heldIngredient = ingredient;
-        _heldIngredient.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = 10;
-        _heldIngredient.transform.SetParent(ingredientAttachmentPoint);
-        _heldIngredient.transform.localPosition = Vector3.zero;
-        _heldIngredient.transform.localRotation = Quaternion.identity;
-    }
-
-    public Ingredient GetHeldIngredient()
-    {
-        return _heldIngredient;
-    }
-
-    public Ingredient ReleaseHeldIngredient()
-    {
-        Ingredient releasedItem = _heldIngredient;
-        _heldIngredient = null;
-
-        if (releasedItem != null)
-        {
-            releasedItem.transform.SetParent(null);
-        }
-
-        return releasedItem;
-    }
-
-    public void DestroyHeldIngredient()
-    {
-        if (_heldIngredient != null)
-        {
-            GameObject objectToDestroy = _heldIngredient.gameObject;
-            _heldIngredient = null;
-            Destroy(objectToDestroy);
-        }
-    }
+    // Public property to give other scripts (like Fridge) access to the Hand
+    public PlayerHandController Hand => handController;
 }

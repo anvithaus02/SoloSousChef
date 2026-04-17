@@ -15,16 +15,16 @@ public class FridgeInteractionHandler : MonoBehaviour, IInteractable
     private void Awake()
     {
         cycleController.Initialize(availableIngredients, cycleDuration);
-        
+
         cycleController.OnIngredientChanged += fridgeView.UpdateIngredientIcon;
         cycleController.OnCyclingStateChanged += fridgeView.SetDisplayActive;
     }
 
     public void OnFocus(PlayerController player)
     {
-        if (player.GetHeldIngredient() != null)
+        if (player.Hand.IsHandFull())
         {
-            fridgeView.ShowStatusMessage("HAND FULL!");
+            fridgeView.ShowStatusMessage("Hand Full!");
         }
         else
         {
@@ -39,9 +39,9 @@ public class FridgeInteractionHandler : MonoBehaviour, IInteractable
 
     public void Interact(PlayerController player)
     {
-        if (player.GetHeldIngredient() != null)
+        if (player.Hand.IsHandFull())
         {
-            fridgeView.ShowStatusMessage("HAND FULL!");
+            fridgeView.ShowStatusMessage("Hand Full!");
             return;
         }
 
@@ -51,12 +51,12 @@ public class FridgeInteractionHandler : MonoBehaviour, IInteractable
     private void SpawnAndGiveIngredient(PlayerController player)
     {
         IngredientData currentData = cycleController.GetCurrentIngredient();
-        
+
         GameObject obj = Instantiate(ingredientPrefab);
         Ingredient ing = obj.GetComponent<Ingredient>();
         ing.Initialize(currentData);
 
-        player.SetHeldIngredient(ing);
+        player.Hand.SetHeldItem(ing);
 
         cycleController.StopCycle();
     }

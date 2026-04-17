@@ -187,6 +187,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8240037112885001519}
   - component: {fileID: 8240037112885001518}
+  - component: {fileID: 3172957728831100714}
+  - component: {fileID: 6815969335618966697}
+  - component: {fileID: 6477119809664787501}
+  - component: {fileID: 3203674478450357638}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -223,8 +227,60 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d30b2218cffc5414fb847688bd0fad28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputHandler: {fileID: 3172957728831100714}
+  locomotion: {fileID: 6815969335618966697}
+  interactionHandler: {fileID: 6477119809664787501}
+  handController: {fileID: 3203674478450357638}
   interactionSensor: {fileID: 58098583}
-  ingredientAttachmentPoint: {fileID: 184017849}
-  _indredientIcon: {fileID: 0}
-  movementSpeed: 5
+--- !u!114 &3172957728831100714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8240037112885001517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d40e8473fe5e3a24387e2bc20e5a5c44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6815969335618966697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8240037112885001517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1c81b56b73187942b6b13308904c1c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSpeed: 7
   rotationSmoothness: 0
+--- !u!114 &6477119809664787501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8240037112885001517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef469a0d2f9cd6b4db99b426f67ddc4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handController: {fileID: 3203674478450357638}
+--- !u!114 &3203674478450357638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8240037112885001517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7d0868f6e039d4d8559c20ed3f4527, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attachmentPoint: {fileID: 184017849}
