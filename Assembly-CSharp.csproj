@@ -62,9 +62,15 @@
     <Analyzer Include="C:\Users\HP\.vscode\extensions\visualstudiotoolsforunity.vstuc-1.2.1\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\InteractableStation.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerInteractionSensor.cs" />
+    <Compile Include="Assets\Scripts\Ingredient\IngredientData.cs" />
+    <Compile Include="Assets\Scripts\Ingredient\Ingredient.cs" />
+    <Compile Include="Assets\Scripts\IInteractable.cs" />
+    <Compile Include="Assets\Scripts\Refrigerator.cs" />
+    <Compile Include="Assets\Scripts\ProcessingStation.cs" />
+    <Compile Include="Assets\Scripts\TrashCan.cs" />
+    <Compile Include="Assets\Scripts\KitchenEnums.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

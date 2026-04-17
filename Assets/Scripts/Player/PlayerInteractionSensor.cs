@@ -4,24 +4,24 @@ using System;
 [RequireComponent(typeof(Collider))]
 public class PlayerInteractionSensor : MonoBehaviour
 {
-    public event Action<InteractableStation> OnStationDetected;
-    public event Action<InteractableStation> OnStationLost;
+    public event Action<IInteractable> OnInteractableDetected;
+    public event Action<IInteractable> OnInteractableLost;
 
     private void OnTriggerEnter(Collider other)
     {
-        // The player "finds" a station
-        if (other.TryGetComponent<InteractableStation>(out var station))
+        if (other.TryGetComponent<IInteractable>(out var interactable))
         {
-            OnStationDetected?.Invoke(station);
+            interactable.OnFocus(); 
+            OnInteractableDetected?.Invoke(interactable);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        // The player "leaves" the station
-        if (other.TryGetComponent<InteractableStation>(out var station))
+        if (other.TryGetComponent<IInteractable>(out var interactable))
         {
-            OnStationLost?.Invoke(station);
+            interactable.OnDefocus(); 
+            OnInteractableLost?.Invoke(interactable);
         }
     }
 }
