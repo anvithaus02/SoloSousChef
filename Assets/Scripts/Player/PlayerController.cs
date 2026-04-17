@@ -129,8 +129,9 @@ public class PlayerController : MonoBehaviour
     {
         if (_heldIngredient != null)
         {
-            Destroy(_heldIngredient.gameObject);
+            GameObject objectToDestroy = _heldIngredient.gameObject;
             _heldIngredient = null;
+            Destroy(objectToDestroy);
         }
     }
 }

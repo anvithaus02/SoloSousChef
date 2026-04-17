@@ -9,18 +9,22 @@ public class PlayerInteractionSensor : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent<IInteractable>(out var interactable))
+        IInteractable interactable = other.GetComponentInParent<IInteractable>();
+
+        if (interactable != null)
         {
-            interactable.OnFocus(); 
+            interactable.OnFocus();
             OnInteractableDetected?.Invoke(interactable);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.TryGetComponent<IInteractable>(out var interactable))
+        IInteractable interactable = other.GetComponentInParent<IInteractable>();
+
+        if (interactable != null)
         {
-            interactable.OnDefocus(); 
+            interactable.OnDefocus();
             OnInteractableLost?.Invoke(interactable);
         }
     }
