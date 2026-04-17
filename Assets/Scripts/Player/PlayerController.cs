@@ -65,12 +65,11 @@ public class PlayerController : MonoBehaviour
 
     private void ProcessSelectionInput()
     {
-       
+
     }
 
     private void SetActiveInteractable(IInteractable interactable)
     {
-        // If we were already looking at something else, defocus it first
         if (_currentInteractable != null && _currentInteractable != interactable)
         {
             _currentInteractable.OnDefocus();
@@ -78,11 +77,9 @@ public class PlayerController : MonoBehaviour
 
         _currentInteractable = interactable;
 
-        // Call OnFocus on the new object
         if (_currentInteractable != null)
         {
-            _currentInteractable.OnFocus();
-            Debug.Log("Focusing on: " + interactable.ToString());
+            _currentInteractable.OnFocus(this);
         }
     }
 

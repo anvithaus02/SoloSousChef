@@ -12,7 +12,7 @@ public class PlayerInteractionSensor : MonoBehaviour
         if (interactable != null)
         {
             OnInteractableDetected?.Invoke(interactable);
-            interactable.OnFocus();
+            interactable.OnFocus(this.GetComponentInParent<PlayerController>());
         }
     }
 

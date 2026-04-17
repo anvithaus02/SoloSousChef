@@ -25,14 +25,20 @@ public class Refrigerator : MonoBehaviour, IInteractable
 
     private void Start()
     {
-        // Ensure UI is hidden initially
         if (ingredientDisplayIcon != null) ingredientDisplayIcon.gameObject.SetActive(false);
         if (statusMessageText != null) statusMessageText.alpha = 0;
     }
 
-    public void OnFocus()
+    public void OnFocus(PlayerController player)
     {
-        StartCycle();
+        if (player.GetHeldIngredient() != null)
+        {
+            ShowStatusMessage("Hand Full!");
+        }
+        else
+        {
+            StartCycle();
+        }
     }
 
     public void OnDefocus()

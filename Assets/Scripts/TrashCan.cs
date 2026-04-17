@@ -3,7 +3,7 @@ using System.Collections;
 
 public class TrashCan : MonoBehaviour, IInteractable
 {
-    public void OnFocus()
+    public void OnFocus(PlayerController playerController)
     {
         // This fires when the PlayerInteractionSensor first detects the 2D Trigger
         Debug.Log("<color=yellow>Trash Can:</color> Player is in range.");

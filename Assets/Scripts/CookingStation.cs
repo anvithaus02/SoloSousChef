@@ -7,7 +7,7 @@ public class CookingStation : MonoBehaviour, IInteractable
     
     public CookingStationID ID => stationID;
 
-    public void OnFocus()
+    public void OnFocus(PlayerController playerController)
     {
         Debug.Log($"<color=orange>Cooking Station:</color> Over {stationID}.");
     }

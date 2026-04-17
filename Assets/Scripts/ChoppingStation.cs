@@ -6,7 +6,7 @@ public class ChoppingStation : MonoBehaviour, IInteractable
     private bool _isChopping = false;
     private Ingredient _itemOnBoard;
 
-    public void OnFocus() => Debug.Log("<color=cyan>Chopping Board:</color> Player in range.");
+    public void OnFocus(PlayerController playerController) => Debug.Log("<color=cyan>Chopping Board:</color> Player in range.");
     public void OnDefocus() => _isChopping = false;
 
     public void Interact(PlayerController player)
