@@ -126,7 +126,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -1.7177582, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -137,7 +137,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 285.27, y: 283.44}
+  m_Size: {x: 144.41483, y: 283.44}
   m_EdgeRadius: 0
 --- !u!1 &5953035565559524870
 GameObject:
@@ -148,6 +148,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8417094708768147558}
+  - component: {fileID: 712324054099070205}
   m_Layer: 5
   m_Name: Stove 1
   m_TagString: Untagged
@@ -178,6 +179,19 @@ RectTransform:
   m_AnchoredPosition: {x: -142.64, y: -372.73}
   m_SizeDelta: {x: 285.27, y: 283.44}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &712324054099070205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5953035565559524870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b53a8c078c7a64da98bcd5aa63edc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stationID: 0
 --- !u!1001 &295706302385882762
 PrefabInstance:
   m_ObjectHideFlags: 0
