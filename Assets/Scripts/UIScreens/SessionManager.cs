@@ -26,11 +26,11 @@ public class SessionManager : MonoBehaviour
     {
         IsSessionActive = true;
         IsPaused = false;
-        
+
         OnSessionStarted?.Invoke();
 
-        _sessionTimer = new TickTimer(this, sessionDuration, true, 
-            (time) => OnTimerUpdated?.Invoke(Mathf.CeilToInt(time)), 
+        _sessionTimer = new TickTimer(this, sessionDuration, true,
+            (time) => OnTimerUpdated?.Invoke(Mathf.CeilToInt(time)),
             EndSession
         );
     }
@@ -43,9 +43,15 @@ public class SessionManager : MonoBehaviour
         OnPauseToggled?.Invoke(IsPaused);
 
         if (IsPaused)
+        {
+            _sessionTimer.IsPaused = true;
             BaseScreenManager.Instance.ShowScreen(ScreenType.GamePausedScreen);
+        }
         else
+        {
+            _sessionTimer.Resume();
             BaseScreenManager.Instance.HideScreen(ScreenType.GamePausedScreen);
+        }
     }
 
     public void EndSession()
@@ -53,7 +59,7 @@ public class SessionManager : MonoBehaviour
         IsSessionActive = false;
         _sessionTimer?.Stop(false);
         OnSessionEnded?.Invoke();
-        
+
         BaseScreenManager.Instance.ShowScreen(ScreenType.GameOver);
     }
 

@@ -18,24 +18,34 @@ public class OrderChit : MonoBehaviour
     [SerializeField] private Transform orderItemHolder;
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private Button serveButton;
+
     private TickTimer _timer;
     private List<OrderItemData> _orderData;
     private List<OrderItem> _spawnedUIItems = new List<OrderItem>();
     private bool _isPlayerInZone = false;
     private float _startTime;
     private OrderManager _orderManager;
-    private Coroutine _timerCoroutine;
 
     private void OnEnable()
     {
         serveButton.onClick.AddListener(OnServerButtonClick);
         ServingTable.OnPlayerAtCounter += SetPlayerZoneStatus;
+        if (SessionManager.Instance != null)
+            SessionManager.Instance.OnPauseToggled += HandlePauseToggled;
     }
 
     private void OnDisable()
     {
         serveButton.onClick.RemoveListener(OnServerButtonClick);
         ServingTable.OnPlayerAtCounter -= SetPlayerZoneStatus;
+        if (SessionManager.Instance != null)
+            SessionManager.Instance.OnPauseToggled -= HandlePauseToggled;
+    }
+
+    private void HandlePauseToggled(bool paused)
+    {
+        Debug.Log("Anvitha Handle Pause Toggel  " + paused + "        " + (_timer != null));
+        if (_timer != null) _timer.IsPaused = paused;
     }
 
     public void InitializeOrderChit(List<OrderItemData> orderItemsData, OrderManager manager)
@@ -46,7 +56,7 @@ public class OrderChit : MonoBehaviour
 
         SpawnOrderItems(orderItemsData);
 
-       _timer = new TickTimer(this, 0, false, (t) => timerText.text = t + "s");
+        _timer = new TickTimer(this, 0, false, (t) => timerText.text = t + "s");
 
         ValidateHand();
     }
@@ -86,11 +96,10 @@ public class OrderChit : MonoBehaviour
         }
 
         IngredientData heldItem = hand.GetHeldItemData();
-        bool isProcessed = hand.IsHeldItemProcessed();
-
         bool isReadyToServe = !heldItem.RequiresProcessing || hand.IsHeldItemProcessed();
+
         bool canServe = _orderData.Any(item => !item.isDelivered && item.ingredientData == heldItem && isReadyToServe);
-        
+
         serveButton.interactable = canServe;
     }
 
@@ -122,26 +131,17 @@ public class OrderChit : MonoBehaviour
 
     private void CompleteOrder()
     {
+        if (_timer != null) 
         _timer.Stop(triggerComplete: false);
+        
         serveButton.interactable = false;
 
         int totalVal = _orderData.Sum(x => x.ingredientData.scoreValue);
-        int seconds = Mathf.FloorToInt(Time.time - _startTime);
-        int finalScore = totalVal - seconds;
+
+        int secondsTaken = _timer.CurrentTime;
+        int finalScore = Mathf.Max(0, totalVal - secondsTaken);
 
         ScoreManager.Instance.AddScore(finalScore, transform.position);
-
-        Debug.Log($"<color=green>[Order Done]</color> {totalVal} - {seconds}s = {finalScore}");
-
         _orderManager.NotifyOrderCompleted(this);
-    }
-
-    private IEnumerator UpdateTimer()
-    {
-        while (true)
-        {
-            timerText.text = Mathf.FloorToInt(Time.time - _startTime).ToString() + "s";
-            yield return new WaitForSeconds(1f);
-        }
     }
 }

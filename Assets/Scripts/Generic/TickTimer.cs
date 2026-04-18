@@ -14,6 +14,8 @@ public class TickTimer
     private Coroutine _activeCoroutine;
     private MonoBehaviour _runner;
 
+    public bool IsPaused { get; set; }
+    public void Resume() => IsPaused = false;
     public TickTimer(MonoBehaviour runner, int duration, bool isCountDown, Action<int> onTick, Action onComplete = null)
     {
         _runner = runner;
@@ -49,6 +51,10 @@ public class TickTimer
         IsRunning = true;
         while (IsRunning)
         {
+            while (IsPaused)
+            {
+                yield return null;
+            }
             _onTick?.Invoke(CurrentTime);
 
             if (_isCountDown && CurrentTime <= 0)
