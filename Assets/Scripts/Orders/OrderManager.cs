@@ -4,11 +4,20 @@ using UnityEngine;
 
 public class OrderManager : MonoBehaviour
 {
+    public static OrderManager Instance { get; private set; } // Fixed Singleton pattern
+
     [SerializeField] private OrderChit[] orderSlots;
     [SerializeField] private IngredientData[] possibleIngredients;
 
-    private void Start()
+    private void Awake()
     {
+        if (Instance != null && Instance != this) { Destroy(gameObject); return; }
+        Instance = this;
+    }
+
+    public void InitializeAllOrders()
+    {
+        StopAllCoroutines(); 
         foreach (var chit in orderSlots)
         {
             GenerateOrderForChit(chit);
@@ -22,9 +31,10 @@ public class OrderManager : MonoBehaviour
 
         for (int i = 0; i < count; i++)
         {
-            newData.Add(new OrderItemData { 
+            newData.Add(new OrderItemData
+            {
                 ingredientData = possibleIngredients[Random.Range(0, possibleIngredients.Length)],
-                isDelivered = false 
+                isDelivered = false
             });
         }
 
@@ -40,5 +50,17 @@ public class OrderManager : MonoBehaviour
     {
         yield return new WaitForSeconds(5f);
         GenerateOrderForChit(chit);
+    }
+
+    public void ClearAllOrders()
+    {
+        StopAllCoroutines(); // Stop pending respawns
+        foreach (var chit in orderSlots)
+        {
+            if (chit != null)
+            {
+                chit.Cleanup(); // Tell the chit to kill its timer
+            }
+        }
     }
 }

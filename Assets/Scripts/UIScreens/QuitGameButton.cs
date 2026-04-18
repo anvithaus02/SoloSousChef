@@ -8,6 +8,7 @@ public class QuitGameButton : ActionButton
     private void OnQuitGameButtonClick()
     {
         SessionManager.Instance.EndSession();
+        OrderManager.Instance.ClearAllOrders();
         BaseScreenManager.Instance.SwitchScreen(ScreenType.GamePausedScreen, ScreenType.MainMenuScreen);
     }
 }

@@ -44,7 +44,6 @@ public class OrderChit : MonoBehaviour
 
     private void HandlePauseToggled(bool paused)
     {
-        Debug.Log("Anvitha Handle Pause Toggel  " + paused + "        " + (_timer != null));
         if (_timer != null) _timer.IsPaused = paused;
     }
 
@@ -131,9 +130,9 @@ public class OrderChit : MonoBehaviour
 
     private void CompleteOrder()
     {
-        if (_timer != null) 
-        _timer.Stop(triggerComplete: false);
-        
+        if (_timer != null)
+            _timer.Stop(triggerComplete: false);
+
         serveButton.interactable = false;
 
         int totalVal = _orderData.Sum(x => x.ingredientData.scoreValue);
@@ -143,5 +142,15 @@ public class OrderChit : MonoBehaviour
 
         ScoreManager.Instance.AddScore(finalScore, transform.position);
         _orderManager.NotifyOrderCompleted(this);
+    }
+
+    public void Cleanup()
+    {
+        if (_timer != null)
+        {
+            _timer.Stop(false);
+            _timer = null;
+        }
+        if (timerText != null) timerText.text = "";
     }
 }
