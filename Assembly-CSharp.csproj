@@ -102,6 +102,7 @@
     <Compile Include="Assets\Scripts\UIScreens\MainGameScreen.cs" />
     <Compile Include="Assets\Scripts\UIScreens\GamePlayScreen.cs" />
     <Compile Include="Assets\Scripts\UIScreens\GamePlayHUD.cs" />
+    <Compile Include="Assets\Scripts\UIScreens\TutorialScreen.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

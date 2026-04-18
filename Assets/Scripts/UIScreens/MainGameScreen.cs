@@ -5,11 +5,13 @@ using UnityEngine;
 public class MainGameScreen : BaseScreen
 {
     [SerializeField] private QuitGameButton quitGameButton;
+    [SerializeField] private ActionButton tutorialButton;
     [SerializeField] private ActionButton startGameButton;
 
     private void Start()
     {
-        startGameButton.Initialize("START ", true, OnStartGameButtonClick);
+        startGameButton.Initialize("START", true, OnStartGameButtonClick);
+        tutorialButton.Initialize("TUTORIAL", true, OnTutorialButtonClick);
         quitGameButton.Initialize();
     }
 
@@ -17,5 +19,10 @@ public class MainGameScreen : BaseScreen
     {
         SessionManager.Instance.StartSession();
         BaseScreenManager.Instance.SwitchScreen(ScreenType.MainMenuScreen, ScreenType.GamePlayScreen);
+    }
+
+    private void OnTutorialButtonClick()
+    {
+        BaseScreenManager.Instance.SwitchScreen(ScreenType.MainMenuScreen, ScreenType.TutorialScreen);
     }
 }
