@@ -9,6 +9,20 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerHandController handController;
     [SerializeField] private PlayerInteractionSensor interactionSensor;
 
+
+    public static PlayerController Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
     private void OnEnable()
     {
         // Subscribe to Sensor Events

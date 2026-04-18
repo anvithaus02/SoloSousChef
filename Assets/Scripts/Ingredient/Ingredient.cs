@@ -29,9 +29,5 @@ public class Ingredient : MonoBehaviour
         if (_data == null) return;
 
         _ingredientSprite.sprite = _isProcessed ? _data.processedSprite : _data.rawSprite;
-        
-        gameObject.name = _isProcessed 
-            ? _data.ingredientName + _data.processedNameSuffix 
-            : _data.ingredientName;
     }
 }

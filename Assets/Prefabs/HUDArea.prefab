@@ -1046,6 +1046,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6476383266473634681}
+  - component: {fileID: 7102904380688617001}
   m_Layer: 5
   m_Name: HUDArea
   m_TagString: Untagged
@@ -1074,3 +1075,18 @@ RectTransform:
   m_AnchoredPosition: {x: 257.47, y: -126.27}
   m_SizeDelta: {x: -514.95, y: 252.54}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7102904380688617001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6476383266473634682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53bf4f1e0be05b343ae22f3f54cdac4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentScoreText: {fileID: 6476383264489571623}
+  highScoreText: {fileID: 6476383265227455510}
+  floatingScorePrefab: {fileID: 0}

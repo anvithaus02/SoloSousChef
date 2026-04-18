@@ -62,30 +62,35 @@
     <Analyzer Include="C:\Users\HP\.vscode\extensions\visualstudiotoolsforunity.vstuc-1.2.1\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerInteractionSensor.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerHandController.cs" />
+    <Compile Include="Assets\Scripts\Station\ChoppingStationHandler.cs" />
     <Compile Include="Assets\Scripts\Ingredient\IngredientData.cs" />
-    <Compile Include="Assets\Scripts\Ingredient\Ingredient.cs" />
+    <Compile Include="Assets\Scripts\Station\StationVisualController.cs" />
+    <Compile Include="Assets\Scripts\Fridge\FridgeView.cs" />
     <Compile Include="Assets\Scripts\IInteractable.cs" />
-    <Compile Include="Assets\Scripts\ProcessingStation.cs" />
-    <Compile Include="Assets\Scripts\TrashCan.cs" />
-    <Compile Include="Assets\Scripts\KitchenEnums.cs" />
-    <Compile Include="Assets\Scripts\ChoppingStation.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerInteractionSensor.cs" />
     <Compile Include="Assets\Scripts\CookingStationHandler.cs" />
     <Compile Include="Assets\Scripts\CookingStationManager.cs" />
-    <Compile Include="Assets\Scripts\Fridge\FridgeCycleController.cs" />
-    <Compile Include="Assets\Scripts\Fridge\FridgeInteractionHandler.cs" />
-    <Compile Include="Assets\Scripts\Fridge\FridgeView.cs" />
-    <Compile Include="Assets\Scripts\Fridge\FridgeDataConfig.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerInputHandler.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerLocomotion.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerHandController.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerInteractionHandler.cs" />
-    <Compile Include="Assets\Scripts\Generic\TimerProgressBar.cs" />
-    <Compile Include="Assets\Scripts\Station\StationVisualController.cs" />
-    <Compile Include="Assets\Scripts\IngredientProcessor.cs" />
-    <Compile Include="Assets\Scripts\Station\ChoppingStationHandler.cs" />
     <Compile Include="Assets\Scripts\Station\BaseStationHandler.cs" />
+    <Compile Include="Assets\Scripts\Orders\OrderManager.cs" />
+    <Compile Include="Assets\Scripts\TrashCan.cs" />
+    <Compile Include="Assets\Scripts\ProcessingStation.cs" />
+    <Compile Include="Assets\Scripts\PlayerProfile\ScoreManager.cs" />
+    <Compile Include="Assets\Scripts\Fridge\FridgeCycleController.cs" />
+    <Compile Include="Assets\Scripts\Ingredient\Ingredient.cs" />
+    <Compile Include="Assets\Scripts\Fridge\FridgeDataConfig.cs" />
+    <Compile Include="Assets\Scripts\Generic\TimerProgressBar.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerInputHandler.cs" />
+    <Compile Include="Assets\Scripts\Orders\ServingTable.cs" />
+    <Compile Include="Assets\Scripts\Fridge\FridgeInteractionHandler.cs" />
+    <Compile Include="Assets\Scripts\Orders\OrderChit.cs" />
+    <Compile Include="Assets\Scripts\ChoppingStation.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerInteractionHandler.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerLocomotion.cs" />
+    <Compile Include="Assets\Scripts\Orders\OrderItem.cs" />
+    <Compile Include="Assets\Scripts\KitchenEnums.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\IngredientProcessor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

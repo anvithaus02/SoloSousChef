@@ -8,8 +8,10 @@ public class IngredientData : ScriptableObject
     public Sprite rawSprite;
     public StationType processingStation;
     public float processingTime = 3f;
+    public int scoreValue;
 
     [Header("Processed State")]
     public Sprite processedSprite;
-    public string processedNameSuffix = " (Chopped)";
+
+    [HideInInspector] public bool RequiresProcessing => processingStation != StationType.None;
 }
