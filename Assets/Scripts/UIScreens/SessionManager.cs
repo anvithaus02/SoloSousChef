@@ -1,0 +1,66 @@
+using UnityEngine;
+using System;
+
+public class SessionManager : MonoBehaviour
+{
+    public static SessionManager Instance { get; private set; }
+
+    public event Action<int> OnTimerUpdated;
+    public event Action OnSessionStarted;
+    public event Action OnSessionEnded;
+    public event Action<bool> OnPauseToggled;
+
+    [SerializeField] private int sessionDuration = 180;
+
+    private TickTimer _sessionTimer;
+    public bool IsSessionActive { get; private set; }
+    public bool IsPaused { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this) { Destroy(gameObject); return; }
+        Instance = this;
+    }
+
+    public void StartSession()
+    {
+        IsSessionActive = true;
+        IsPaused = false;
+        
+        OnSessionStarted?.Invoke();
+
+        _sessionTimer = new TickTimer(this, sessionDuration, true, 
+            (time) => OnTimerUpdated?.Invoke(Mathf.CeilToInt(time)), 
+            EndSession
+        );
+    }
+
+    public void TogglePause(bool pause)
+    {
+        if (!IsSessionActive) return;
+
+        IsPaused = pause;
+        OnPauseToggled?.Invoke(IsPaused);
+
+        if (IsPaused)
+            BaseScreenManager.Instance.ShowScreen(ScreenType.GamePausedScreen);
+        else
+            BaseScreenManager.Instance.HideScreen(ScreenType.GamePausedScreen);
+    }
+
+    public void EndSession()
+    {
+        IsSessionActive = false;
+        _sessionTimer?.Stop(false);
+        OnSessionEnded?.Invoke();
+        
+        BaseScreenManager.Instance.ShowScreen(ScreenType.GameOver);
+    }
+
+    public void Cleanup()
+    {
+        IsSessionActive = false;
+        IsPaused = false;
+        _sessionTimer?.Stop(false);
+    }
+}
