@@ -7,34 +7,28 @@ public class StationVisualController : MonoBehaviour
 
     private void OnEnable()
     {
-        processor.OnProgressUpdated += HandleProgressUpdate;
+        processor.OnProcessingStarted += HandleProcessingStarted;
         processor.OnProcessingComplete += HandleProcessingComplete;
     }
 
     private void OnDisable()
     {
-        processor.OnProgressUpdated -= HandleProgressUpdate;
+        processor.OnProcessingStarted -= HandleProcessingStarted;
         processor.OnProcessingComplete -= HandleProcessingComplete;
     }
 
-    private void HandleProgressUpdate(float current, float max)
+    private void HandleProcessingStarted(float duration)
     {
-        if (!progressBar.gameObject.activeSelf)
-        {
-            progressBar.SetVisibility(true);
-        }
-
-        progressBar.UpdateTimer(current, max, TimerProgressBar.DisplayMode.Decreasing);
+        progressBar.StartProgress(duration, TimerProgressBar.DisplayMode.Decreasing);
     }
 
     private void HandleProcessingComplete()
     {
-        progressBar.SetVisibility(false);
+        ResetView();
     }
 
     public void ResetView()
     {
-        progressBar.SetVisibility(false);
-        progressBar.UpdateTimer(0, 1, TimerProgressBar.DisplayMode.Decreasing);
+        progressBar.StopProgress();
     }
 }

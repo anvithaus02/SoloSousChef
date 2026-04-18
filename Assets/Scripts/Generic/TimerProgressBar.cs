@@ -10,29 +10,49 @@ public class TimerProgressBar : MonoBehaviour
     [Header("UI References")]
     [SerializeField] private Image fillImage;
     [SerializeField] private TextMeshProUGUI label;
-    
+
     private CanvasGroup _canvasGroup;
+    private TickTimer _internalTimer;
 
     private void Awake()
     {
         _canvasGroup = GetComponent<CanvasGroup>();
+        SetVisibility(false);
+    }
+    public void StartProgress(float duration, DisplayMode mode, System.Action onComplete = null)
+    {
+        StopProgress();
+        SetVisibility(true);
+
+        _internalTimer = new TickTimer(this, (int)duration, mode == DisplayMode.Decreasing,
+            (currentTime) => UpdateUI(currentTime, duration),
+            () =>
+            {
+                SetVisibility(false);
+                onComplete?.Invoke();
+            }
+        );
+    }
+    private void UpdateUI(float current, float max)
+    {
+        fillImage.fillAmount = current / max;
+        label.text = Mathf.CeilToInt(current).ToString();
+        Debug.Log("Anvitha Current Time is : " + current + "  Max is : " + max + "  fillImage.fillAmount : " + fillImage.fillAmount);
     }
 
-    public void UpdateTimer(float current, float max, DisplayMode mode)
+    public void StopProgress()
     {
-        float ratio = Mathf.Clamp01(current / max);
-        
-        fillImage.fillAmount = (mode == DisplayMode.Increasing) ? ratio : (1f - ratio);
-
-        if (label != null)
+        if (_internalTimer != null)
         {
-            label.text = $"{current:F1}sec";
+            _internalTimer.Stop(false);
         }
+        SetVisibility(false);
     }
 
     public void SetVisibility(bool isVisible)
     {
         if (_canvasGroup == null) _canvasGroup = GetComponent<CanvasGroup>();
         _canvasGroup.alpha = isVisible ? 1f : 0f;
+        _canvasGroup.blocksRaycasts = isVisible;
     }
 }

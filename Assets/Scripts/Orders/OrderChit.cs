@@ -18,7 +18,7 @@ public class OrderChit : MonoBehaviour
     [SerializeField] private Transform orderItemHolder;
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private Button serveButton;
-
+    private TickTimer _timer;
     private List<OrderItemData> _orderData;
     private List<OrderItem> _spawnedUIItems = new List<OrderItem>();
     private bool _isPlayerInZone = false;
@@ -46,9 +46,7 @@ public class OrderChit : MonoBehaviour
 
         SpawnOrderItems(orderItemsData);
 
-        if (_timerCoroutine != null)
-            StopCoroutine(_timerCoroutine);
-        _timerCoroutine = StartCoroutine(UpdateTimer());
+       _timer = new TickTimer(this, 0, false, (t) => timerText.text = t + "s");
 
         ValidateHand();
     }
@@ -124,7 +122,7 @@ public class OrderChit : MonoBehaviour
 
     private void CompleteOrder()
     {
-        if (_timerCoroutine != null) StopCoroutine(_timerCoroutine);
+        _timer.Stop(triggerComplete: false);
         serveButton.interactable = false;
 
         int totalVal = _orderData.Sum(x => x.ingredientData.scoreValue);
