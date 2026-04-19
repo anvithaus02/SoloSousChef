@@ -152,7 +152,7 @@ GameObject:
   - component: {fileID: 335203968155796852}
   - component: {fileID: 3983083208367424421}
   m_Layer: 5
-  m_Name: Stove 1
+  m_Name: CookingStation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
