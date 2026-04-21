@@ -7,7 +7,7 @@ public class GamePausedScreen : BaseScreen
 
     private void Start()
     {
-        gameResumeButton.Initialize(ButtonType.Secondary,"RESUME", true, OnResumeButtonClick);
+        gameResumeButton.Initialize(ButtonType.Primary,"Resume", true, OnResumeButtonClick);
         quitGameButton.Initialize();
     }
 

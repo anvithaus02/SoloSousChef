@@ -2,7 +2,7 @@ public class QuitGameButton : ActionButton
 {
     public void Initialize()
     {
-        base.Initialize(ButtonType.Secondary,"QUIT", true, OnQuitGameButtonClick);
+        base.Initialize(ButtonType.Secondary,"Quit", true, OnQuitGameButtonClick);
     }
 
     private void OnQuitGameButtonClick()
