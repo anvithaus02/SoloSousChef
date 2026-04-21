@@ -12,7 +12,7 @@ public class GamePlayHUD : MonoBehaviour
     [Header("Session UI")]
     [SerializeField] private TextMeshProUGUI gameTimerText;
     [SerializeField] private ActionButton pauseGameButton;
-    [SerializeField] private QuitGameButton quitGameButton;
+    [SerializeField] private ActionButton quitGameButton;
 
     [Header("VFX")]
     [SerializeField] private GameObject floatingScorePrefab;
@@ -45,14 +45,13 @@ public class GamePlayHUD : MonoBehaviour
         UpdateScoreUI(ScoreManager.Instance.GetCurrentScore());
         bestScoreText.text = $"Best: {ScoreManager.Instance.GetHighScore()}";
 
-        pauseGameButton.Initialize(ButtonType.Secondary,"PAUSE", true, () =>
+        pauseGameButton.Initialize(ButtonType.Pause, string.Empty, true, () =>
         {
             SessionManager.Instance.TogglePause(true);
         });
 
-        quitGameButton.Initialize();
+        quitGameButton.Initialize(ButtonType.Quit, string.Empty, true, OnQuitGameButtonClick);
     }
-
     private void UpdateScoreUI(int score)
     {
         currentScoreText.text = $"Score: {score}";
@@ -80,5 +79,12 @@ public class GamePlayHUD : MonoBehaviour
             go.transform.DOMoveY(worldPosition.y + 1.5f, 1f);
             textComp.DOFade(0, 1f).OnComplete(() => Destroy(go));
         }
+    }
+
+    private void OnQuitGameButtonClick()
+    {
+        SessionManager.Instance.EndSession();
+        OrderManager.Instance.ClearAllOrders();
+        BaseScreenManager.Instance.SwitchScreen(ScreenType.GamePausedScreen, ScreenType.MainMenuScreen);
     }
 }

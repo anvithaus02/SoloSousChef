@@ -7,7 +7,9 @@ using DG.Tweening;
 public enum ButtonType
 {
     Primary,
-    Secondary
+    Secondary,
+    Quit,
+    Pause
 }
 public class ActionButton : MonoBehaviour
 {
@@ -34,8 +36,7 @@ public class ActionButton : MonoBehaviour
     public void Initialize(ButtonType buttonType, string text, bool isInteractable, Action onButtonClick)
     {
         SetButtonUI(buttonType);
-
-        buttonText.text = text;
+        SetButtonTextState(text);
         actionButton.interactable = isInteractable;
         _onButtonClickCallback = onButtonClick;
     }
@@ -50,6 +51,17 @@ public class ActionButton : MonoBehaviour
         ButtonVisualData data = buttonConfig.GetData(buttonType);
         buttonBG.sprite = data.buttonSprite;
         buttonText.color = data.fontColor;
+    }
+
+    private void SetButtonTextState(string text)
+    {
+        bool isTextPresent = !string.IsNullOrEmpty(text);
+        buttonText.gameObject.SetActive(isTextPresent);
+
+        if (isTextPresent)
+        {
+            buttonText.text = text;
+        }
     }
 
     private void HandleButtonClick()

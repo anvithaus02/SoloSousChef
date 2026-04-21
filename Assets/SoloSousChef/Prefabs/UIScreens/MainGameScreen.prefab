@@ -133,7 +133,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6169499378987686289}
-  - {fileID: 6415382684194048232}
+  - {fileID: 2299429869116764009}
   m_Father: {fileID: 4720072520244544530}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -244,7 +244,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   screenType: 0
-  tutorialButton: {fileID: 7670834470360355700}
+  tutorialButton: {fileID: 3212602040078447861}
   startGameButton: {fileID: 7413546484856996365}
 --- !u!1001 &408080483473980628
 PrefabInstance:
@@ -379,7 +379,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 224a53f269d04074881bccf2b2eb7a5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &666455200997158317
+--- !u!1001 &5755189925579393580
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -389,6 +389,10 @@ PrefabInstance:
     - target: {fileID: 2427230407248163945, guid: 41cb95fd187fa7e4c9d756906182babe, type: 3}
       propertyPath: m_Name
       value: TutorialButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 2427230407248163945, guid: 41cb95fd187fa7e4c9d756906182babe, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5780297514497451333, guid: 41cb95fd187fa7e4c9d756906182babe, type: 3}
       propertyPath: m_Pivot.x
@@ -474,17 +478,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6955967616110758849, guid: 41cb95fd187fa7e4c9d756906182babe, type: 3}
+      propertyPath: m_fontSize
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 6955967616110758849, guid: 41cb95fd187fa7e4c9d756906182babe, type: 3}
+      propertyPath: m_fontSizeMax
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 6955967616110758849, guid: 41cb95fd187fa7e4c9d756906182babe, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 6955967616110758849, guid: 41cb95fd187fa7e4c9d756906182babe, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4283126104
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 41cb95fd187fa7e4c9d756906182babe, type: 3}
---- !u!224 &6415382684194048232 stripped
+--- !u!224 &2299429869116764009 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5780297514497451333, guid: 41cb95fd187fa7e4c9d756906182babe, type: 3}
-  m_PrefabInstance: {fileID: 666455200997158317}
+  m_PrefabInstance: {fileID: 5755189925579393580}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7670834470360355700 stripped
+--- !u!114 &3212602040078447861 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7155091942811057881, guid: 41cb95fd187fa7e4c9d756906182babe, type: 3}
-  m_PrefabInstance: {fileID: 666455200997158317}
+  m_PrefabInstance: {fileID: 5755189925579393580}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1

@@ -14,7 +14,6 @@ public class OrderItem : MonoBehaviour
     public void IntializeOrderItem(IngredientData ingredient)
     {
         SetIcon(ingredient.processedSprite);
-        SetName(ingredient.ingredientName);
         SetDeliveryStatusIcon(false);
     }
 
@@ -28,8 +27,4 @@ public class OrderItem : MonoBehaviour
         ingredientIcon.sprite = icon;
     }
 
-    private void SetName(string name)
-    {
-        ingredientName.text = name;
-    }
 }
