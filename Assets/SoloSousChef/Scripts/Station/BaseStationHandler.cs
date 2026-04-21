@@ -3,11 +3,11 @@ using UnityEngine;
 public abstract class BaseStationHandler : MonoBehaviour, IInteractable
 {
     [SerializeField] protected IngredientProcessor processor;
-    [SerializeField] protected StationVisualController stationView; 
+    [SerializeField] protected StationVisualController stationView;
     [SerializeField] protected GameObject ingredientPrefab;
-[SerializeField] protected Transform itemSocket;
+    [SerializeField] protected Transform itemSocket;
     protected Ingredient _placedIngredient;
-    
+
     protected virtual void OnEnable() => processor.OnProcessingComplete += HandleLogicCompletion;
     protected virtual void OnDisable() => processor.OnProcessingComplete -= HandleLogicCompletion;
     [SerializeField] protected StationType acceptedStationType;
@@ -42,7 +42,7 @@ public abstract class BaseStationHandler : MonoBehaviour, IInteractable
     {
         player.Hand.ClearHand();
         GameObject obj = Instantiate(ingredientPrefab, itemSocket.position, Quaternion.identity, itemSocket);
-        
+
         _placedIngredient = obj.GetComponent<Ingredient>();
         _placedIngredient.Initialize(data, false);
         processor.StartProcessing(data);
@@ -52,13 +52,13 @@ public abstract class BaseStationHandler : MonoBehaviour, IInteractable
     {
         player.Hand.SetHeldItem(processor.GetProcessedData(), true);
         if (_placedIngredient != null) Destroy(_placedIngredient.gameObject);
-        
+
         processor.Reset();
         stationView.ResetView();
     }
 
-    
-    
+
+
     protected virtual void HandleLogicCompletion()
     {
         if (_placedIngredient != null) _placedIngredient.SetProcessed();
