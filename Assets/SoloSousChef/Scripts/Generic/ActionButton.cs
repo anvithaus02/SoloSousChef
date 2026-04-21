@@ -4,11 +4,19 @@ using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
 
+public enum ButtonType
+{
+    Primary,
+    Secondary
+}
 public class ActionButton : MonoBehaviour
 {
     [SerializeField] private Button actionButton;
     [SerializeField] private RectTransform pressAnimTransform;
     [SerializeField] private TextMeshProUGUI buttonText;
+    [SerializeField] private Image buttonBG;
+    [SerializeField] private ButtonConfigurationSO buttonConfig;
+
 
     private Action _onButtonClickCallback;
 
@@ -23,8 +31,10 @@ public class ActionButton : MonoBehaviour
         pressAnimTransform.DOKill();
     }
 
-    public void Initialize(string text, bool isInteractable, Action onButtonClick)
+    public void Initialize(ButtonType buttonType, string text, bool isInteractable, Action onButtonClick)
     {
+        SetButtonUI(buttonType);
+
         buttonText.text = text;
         actionButton.interactable = isInteractable;
         _onButtonClickCallback = onButtonClick;
@@ -35,6 +45,13 @@ public class ActionButton : MonoBehaviour
         actionButton.interactable = isInteractable;
     }
 
+    private void SetButtonUI(ButtonType buttonType)
+    {
+        ButtonVisualData data = buttonConfig.GetData(buttonType);
+        buttonBG.sprite = data.buttonSprite;
+        buttonText.color = data.fontColor;
+    }
+
     private void HandleButtonClick()
     {
         PlayPressAnim();
@@ -43,8 +60,8 @@ public class ActionButton : MonoBehaviour
 
     private void PlayPressAnim()
     {
-        if (pressAnimTransform == null) 
-        return;
+        if (pressAnimTransform == null)
+            return;
 
         pressAnimTransform.localScale = Vector3.one;
         pressAnimTransform.DOPunchScale(new Vector3(-0.1f, -0.1f, -0.1f), 0.1f, 0, 0)

@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class MainGameScreen : BaseScreen
 {
-    [SerializeField] private QuitGameButton quitGameButton;
     [SerializeField] private ActionButton tutorialButton;
     [SerializeField] private ActionButton startGameButton;
 
     private void Start()
     {
-        startGameButton.Initialize("START", true, OnStartGameButtonClick);
-        tutorialButton.Initialize("TUTORIAL", true, OnTutorialButtonClick);
-        quitGameButton.Initialize();
+        startGameButton.Initialize(ButtonType.Primary,"Start", true, OnStartGameButtonClick);
+        tutorialButton.Initialize(ButtonType.Secondary,"Tutorial", true, OnTutorialButtonClick);
     }
 
     private void OnStartGameButtonClick()

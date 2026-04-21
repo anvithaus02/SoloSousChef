@@ -103,6 +103,7 @@
     <Compile Include="Assets\SoloSousChef\Scripts\Generic\BaseScreenManager.cs" />
     <Compile Include="Assets\SoloSousChef\Scripts\Player\PlayerController.cs" />
     <Compile Include="Assets\SoloSousChef\Scripts\IngredientProcessor.cs" />
+    <Compile Include="Assets\SoloSousChef\Data\UI\ButtonConfigurationSO.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -978,6 +979,7 @@
     <ProjectReference Include="Unity.VisualScripting.State.csproj" />
     <ProjectReference Include="Unity.VisualScripting.Core.csproj" />
     <ProjectReference Include="Unity.EditorCoroutines.Editor.csproj" />
+    <ProjectReference Include="Unity.2D.Sprite.Editor.csproj" />
   </ItemGroup>
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
   <ItemGroup>

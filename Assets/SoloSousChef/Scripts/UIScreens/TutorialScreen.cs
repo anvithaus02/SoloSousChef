@@ -9,7 +9,7 @@ public class TutorialScreen : BaseScreen
     public override void Show(bool animate = true)
     {
         base.Show(animate);
-        closeButton.Initialize("CLOSE", true, OnCloseButtonClick);
+        closeButton.Initialize(ButtonType.Secondary,"CLOSE", true, OnCloseButtonClick);
     }
 
     private void OnCloseButtonClick()

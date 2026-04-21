@@ -45,7 +45,7 @@ public class GamePlayHUD : MonoBehaviour
         UpdateScoreUI(ScoreManager.Instance.GetCurrentScore());
         bestScoreText.text = $"Best: {ScoreManager.Instance.GetHighScore()}";
 
-        pauseGameButton.Initialize("PAUSE", true, () =>
+        pauseGameButton.Initialize(ButtonType.Secondary,"PAUSE", true, () =>
         {
             SessionManager.Instance.TogglePause(true);
         });
