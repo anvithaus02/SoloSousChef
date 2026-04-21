@@ -2,6 +2,8 @@ using UnityEngine;
 using TMPro;
 using System;
 using DG.Tweening;
+using System.IO;
+using System.Text;
 
 public class GamePlayHUD : MonoBehaviour
 {
@@ -54,6 +56,7 @@ public class GamePlayHUD : MonoBehaviour
     }
     private void UpdateScoreUI(int score)
     {
+        Debug.Log("Anvitha Current Score is : " + score);
         currentScoreText.text = $"Score: {score}";
         currentScoreText.transform.DOPunchScale(Vector3.one * 0.1f, 0.2f);
     }
@@ -87,4 +90,42 @@ public class GamePlayHUD : MonoBehaviour
         OrderManager.Instance.ClearAllOrders();
         BaseScreenManager.Instance.SwitchScreen(ScreenType.GamePausedScreen, ScreenType.MainMenuScreen);
     }
+
+        [ContextMenu("Log SoloSousChef Scripts")]
+        private void LogProjectScripts()
+        {
+            // Application.dataPath = E:/Projects/SoloSousChef/Assets
+            // We combine it to get: E:/Projects/SoloSousChef/Assets/SoloSousChef
+            string targetPath = Path.Combine(Application.dataPath, "SoloSousChef");
+
+            // Clean up the path to fix any / vs \ issues
+            targetPath = Path.GetFullPath(targetPath);
+
+            if (Directory.Exists(targetPath))
+            {
+                string[] files = Directory.GetFiles(targetPath, "*.cs", SearchOption.AllDirectories);
+
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine($"<b>Found {files.Length} Scripts in:</b> {targetPath}");
+                sb.AppendLine("Format: [File Name] ---> [Full Path]");
+                sb.AppendLine("_________________________________");
+
+                for (int i = 0; i < files.Length; i++)
+                {
+                    string fullPath = files[i];
+                    string fileName = Path.GetFileName(fullPath);
+
+                    // Append in the requested format: fileName ---> filePath
+                    sb.AppendLine($"{i + 1}. {fileName} ---> {fullPath}");
+                }
+
+                Debug.Log(sb.ToString());
+            }
+            else
+            {
+                Debug.LogError($"[File Search] Directory Not Found! Looked at: {targetPath}");
+                Debug.Log("Check if your folder name is exactly 'SoloSousChef' inside the Assets folder.");
+            }
+        }
+    
 }

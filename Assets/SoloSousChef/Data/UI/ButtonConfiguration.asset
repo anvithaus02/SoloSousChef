@@ -19,3 +19,9 @@ MonoBehaviour:
   - type: 1
     buttonSprite: {fileID: 21300000, guid: 52c25e74c8ebcd54e8ddc7ec6227643c, type: 3}
     fontColor: {r: 0.34509805, g: 0.31764707, b: 0.29411766, a: 1}
+  - type: 2
+    buttonSprite: {fileID: 21300000, guid: d3b55ffad1eea5b4186750cb1ca5219e, type: 3}
+    fontColor: {r: 0.34509805, g: 0.31764707, b: 0.29411766, a: 1}
+  - type: 3
+    buttonSprite: {fileID: 21300000, guid: cad1afd2648c73249866c551142bc816, type: 3}
+    fontColor: {r: 0.34509805, g: 0.31764707, b: 0.29411766, a: 1}

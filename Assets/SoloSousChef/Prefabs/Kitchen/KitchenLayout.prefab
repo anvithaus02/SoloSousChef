@@ -201,7 +201,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8462126904508504293}
-  - component: {fileID: 817936723902178913}
   m_Layer: 5
   m_Name: CookingStations
   m_TagString: Untagged
@@ -231,18 +230,6 @@ RectTransform:
   m_AnchoredPosition: {x: 46.12, y: 0}
   m_SizeDelta: {x: 662.78, y: 308.99}
   m_Pivot: {x: 0.5, y: 0}
---- !u!114 &817936723902178913
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4830386717787295189}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 394f1e4d994f8ff45a6dc8801a3db372, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &324564854894456946
 PrefabInstance:
   m_ObjectHideFlags: 0
