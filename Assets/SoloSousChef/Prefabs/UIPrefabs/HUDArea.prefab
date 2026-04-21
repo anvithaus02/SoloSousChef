@@ -67,7 +67,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 923f635d5c8d2224497f6308e843960f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cf0595f586faec04bb43a693715d2c8d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1024,6 +1024,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3470883627254100560, guid: d30352d803162664b8f8216d2d65f829, type: 3}
+      propertyPath: m_fontSize
+      value: 39.65
+      objectReference: {fileID: 0}
     - target: {fileID: 8146097789963177464, guid: d30352d803162664b8f8216d2d65f829, type: 3}
       propertyPath: m_Name
       value: QuitGameButton
@@ -1136,6 +1140,10 @@ PrefabInstance:
     - target: {fileID: 41724282281499860, guid: d30352d803162664b8f8216d2d65f829, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3470883627254100560, guid: d30352d803162664b8f8216d2d65f829, type: 3}
+      propertyPath: m_fontSize
+      value: 39.65
       objectReference: {fileID: 0}
     - target: {fileID: 8146097789963177464, guid: d30352d803162664b8f8216d2d65f829, type: 3}
       propertyPath: m_Name

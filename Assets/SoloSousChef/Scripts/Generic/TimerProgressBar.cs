@@ -37,7 +37,6 @@ public class TimerProgressBar : MonoBehaviour
     {
         fillImage.fillAmount = current / max;
         label.text = Mathf.CeilToInt(current).ToString();
-        Debug.Log("Anvitha Current Time is : " + current + "  Max is : " + max + "  fillImage.fillAmount : " + fillImage.fillAmount);
     }
 
     public void StopProgress()

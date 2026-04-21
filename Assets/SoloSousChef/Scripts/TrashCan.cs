@@ -1,9 +1,19 @@
+using UnityEngine.UI;
 using UnityEngine;
 
 public class TrashCan : MonoBehaviour, IInteractable
 {
-    public void OnFocus(PlayerController player) { }
-    public void OnDefocus() { }
+    [SerializeField] private Image trashBinIcon;
+    [SerializeField] private Sprite openIcon;
+    [SerializeField] private Sprite closeIcon;
+    public void OnFocus(PlayerController player)
+    {
+        SetBinState(true);
+    }
+    public void OnDefocus()
+    {
+        SetBinState(false);
+    }
 
     public void Interact(PlayerController player)
     {
@@ -11,5 +21,10 @@ public class TrashCan : MonoBehaviour, IInteractable
         {
             player.Hand.ClearHand();
         }
+    }
+
+    private void SetBinState(bool isOpen)
+    {
+        trashBinIcon.sprite = isOpen ? openIcon : closeIcon;
     }
 }

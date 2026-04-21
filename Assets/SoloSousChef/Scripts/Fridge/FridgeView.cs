@@ -1,21 +1,33 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 
 public class FridgeView : MonoBehaviour
 {
-    [SerializeField] private Image ingredientDisplayIcon;
+    [SerializeField] private IngredientBubble ingredientDisplayIcon;
     [SerializeField] private TextMeshProUGUI statusMessageText;
     [SerializeField] private float fadeDuration = 0.5f;
 
+    [Header("State")]
+    [SerializeField] private Image fridgeIcon;
+    [SerializeField] private Sprite openIcon;
+    [SerializeField] private Sprite closeIcon;
+
+    private void Start()
+    {
+        SetDisplayActive(false);
+    }
+
     public void SetDisplayActive(bool isActive)
     {
-        ingredientDisplayIcon.gameObject.SetActive(isActive);
+        ingredientDisplayIcon.SetDisplayState(isActive);
+        SetFridgeState(isActive);
     }
 
     public void UpdateIngredientIcon(IngredientData data)
     {
-        ingredientDisplayIcon.sprite = data.rawSprite;
+        ingredientDisplayIcon.Initailize(data.rawSprite);
     }
 
     public void ShowStatusMessage(string message)
@@ -36,5 +48,10 @@ public class FridgeView : MonoBehaviour
             statusMessageText.alpha = t;
             yield return null;
         }
+    }
+
+    private void SetFridgeState(bool isOpen)
+    {
+        fridgeIcon.sprite = isOpen ? openIcon : closeIcon;
     }
 }

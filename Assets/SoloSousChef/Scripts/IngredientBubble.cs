@@ -13,4 +13,9 @@ public class IngredientBubble : MonoBehaviour
         ingredientBubble.localScale = new Vector3(scaleValue, scaleValue, scaleValue);
         ingredientIcon.sprite = icon;
     }
+
+    public void SetDisplayState(bool isVisible)
+    {
+        gameObject.SetActive(isVisible);
+    }
 }

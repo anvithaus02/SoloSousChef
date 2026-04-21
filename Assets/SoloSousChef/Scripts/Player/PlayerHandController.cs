@@ -9,6 +9,11 @@ public class PlayerHandController : MonoBehaviour
 
     public bool IsHandFull() => _heldData != null;
 
+    private void Start()
+    {
+        UpdateVisuals();
+    }
+
     public void SetHeldItem(IngredientData data, bool isProcessed)
     {
         _heldData = data;
@@ -31,6 +36,6 @@ public class PlayerHandController : MonoBehaviour
         Sprite sprite = null;
         if (_heldData != null)
             sprite = _isProcessed ? _heldData.processedSprite : _heldData.rawSprite;
-        ingredientBubble.Initailize(sprite, _heldData == null ? 0.0f : 0.2f);
+        ingredientBubble.Initailize(sprite, _heldData == null ? 0.0f : 0.15f);
     }
 }
