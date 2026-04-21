@@ -17,7 +17,7 @@ public class OrderChit : MonoBehaviour
     [SerializeField] private OrderItem orderItemPrefab;
     [SerializeField] private Transform orderItemHolder;
     [SerializeField] private TextMeshProUGUI timerText;
-    [SerializeField] private Button serveButton;
+    [SerializeField] private ActionButton serveButton;
 
     private TickTimer _timer;
     private List<OrderItemData> _orderData;
@@ -28,7 +28,7 @@ public class OrderChit : MonoBehaviour
 
     private void OnEnable()
     {
-        serveButton.onClick.AddListener(OnServerButtonClick);
+        serveButton.Initialize(ButtonType.Primary, "Serve", true, OnServerButtonClick);
         ServingTable.OnPlayerAtCounter += SetPlayerZoneStatus;
         if (SessionManager.Instance != null)
             SessionManager.Instance.OnPauseToggled += HandlePauseToggled;
@@ -36,7 +36,6 @@ public class OrderChit : MonoBehaviour
 
     private void OnDisable()
     {
-        serveButton.onClick.RemoveListener(OnServerButtonClick);
         ServingTable.OnPlayerAtCounter -= SetPlayerZoneStatus;
         if (SessionManager.Instance != null)
             SessionManager.Instance.OnPauseToggled -= HandlePauseToggled;
@@ -83,14 +82,14 @@ public class OrderChit : MonoBehaviour
     {
         if (!_isPlayerInZone)
         {
-            serveButton.interactable = false;
+            serveButton.SetInteractability(false);
             return;
         }
 
         var hand = PlayerController.Instance.Hand;
         if (!hand.IsHandFull())
         {
-            serveButton.interactable = false;
+            serveButton.SetInteractability(false);
             return;
         }
 
@@ -99,7 +98,7 @@ public class OrderChit : MonoBehaviour
 
         bool canServe = _orderData.Any(item => !item.isDelivered && item.ingredientData == heldItem && isReadyToServe);
 
-        serveButton.interactable = canServe;
+        serveButton.SetInteractability(canServe);
     }
 
     private void OnServerButtonClick()
@@ -133,7 +132,7 @@ public class OrderChit : MonoBehaviour
         if (_timer != null)
             _timer.Stop(triggerComplete: false);
 
-        serveButton.interactable = false;
+        serveButton.SetInteractability(false);
 
         int totalVal = _orderData.Sum(x => x.ingredientData.scoreValue);
 
