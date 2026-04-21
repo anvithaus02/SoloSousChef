@@ -257,10 +257,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: StartButton
       objectReference: {fileID: 0}
-    - target: {fileID: 2427230407248163945, guid: 41cb95fd187fa7e4c9d756906182babe, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5780297514497451333, guid: 41cb95fd187fa7e4c9d756906182babe, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -344,22 +340,6 @@ PrefabInstance:
     - target: {fileID: 5780297514497451333, guid: 41cb95fd187fa7e4c9d756906182babe, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6955967616110758849, guid: 41cb95fd187fa7e4c9d756906182babe, type: 3}
-      propertyPath: m_fontSize
-      value: 75
-      objectReference: {fileID: 0}
-    - target: {fileID: 6955967616110758849, guid: 41cb95fd187fa7e4c9d756906182babe, type: 3}
-      propertyPath: m_fontSizeMax
-      value: 75
-      objectReference: {fileID: 0}
-    - target: {fileID: 6955967616110758849, guid: 41cb95fd187fa7e4c9d756906182babe, type: 3}
-      propertyPath: m_fontSizeBase
-      value: 75
-      objectReference: {fileID: 0}
-    - target: {fileID: 6955967616110758849, guid: 41cb95fd187fa7e4c9d756906182babe, type: 3}
-      propertyPath: m_fontColor32.rgba
-      value: 4283126104
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 41cb95fd187fa7e4c9d756906182babe, type: 3}

@@ -44,6 +44,10 @@ public class ActionButton : MonoBehaviour
     public void SetInteractability(bool isInteractable)
     {
         actionButton.interactable = isInteractable;
+
+        Color textColor = buttonText.color;
+        textColor.a = isInteractable ? 1.0f : 0.5f;
+        buttonText.color = textColor;
     }
 
     private void SetButtonUI(ButtonType buttonType)

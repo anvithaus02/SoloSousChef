@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class PlayerHandController : MonoBehaviour
 {
-    [SerializeField] private SpriteRenderer ingredientIcon;
-    
+    [SerializeField] private IngredientBubble ingredientBubble;
+
     private IngredientData _heldData;
     private bool _isProcessed;
 
@@ -28,14 +28,9 @@ public class PlayerHandController : MonoBehaviour
 
     private void UpdateVisuals()
     {
-        if (_heldData == null)
-        {
-            ingredientIcon.sprite = null;
-            ingredientIcon.enabled = false;
-            return;
-        }
-
-        ingredientIcon.enabled = true;
-        ingredientIcon.sprite = _isProcessed ? _heldData.processedSprite : _heldData.rawSprite;
+        Sprite sprite = null;
+        if (_heldData != null)
+            sprite = _isProcessed ? _heldData.processedSprite : _heldData.rawSprite;
+        ingredientBubble.Initailize(sprite, _heldData == null ? 0.0f : 0.2f);
     }
 }

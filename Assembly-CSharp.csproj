@@ -67,7 +67,6 @@
     <Compile Include="Assets\SoloSousChef\Scripts\Generic\ActionButton.cs" />
     <Compile Include="Assets\SoloSousChef\Scripts\Ingredient\IngredientData.cs" />
     <Compile Include="Assets\SoloSousChef\Scripts\Station\StationVisualController.cs" />
-    <Compile Include="Assets\SoloSousChef\Scripts\UIScreens\QuitGameButton.cs" />
     <Compile Include="Assets\SoloSousChef\Scripts\UIScreens\ScreenRegistry.cs" />
     <Compile Include="Assets\SoloSousChef\Scripts\Fridge\FridgeView.cs" />
     <Compile Include="Assets\SoloSousChef\Scripts\IInteractable.cs" />
@@ -104,6 +103,8 @@
     <Compile Include="Assets\SoloSousChef\Scripts\Player\PlayerController.cs" />
     <Compile Include="Assets\SoloSousChef\Scripts\IngredientProcessor.cs" />
     <Compile Include="Assets\SoloSousChef\Data\UI\ButtonConfigurationSO.cs" />
+    <Compile Include="Assets\SoloSousChef\Scripts\IngredientBubble.cs" />
+    <Compile Include="Assets\SoloSousChef\Scripts\Generic\UIAnchorFollower.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

@@ -61,7 +61,7 @@ public class GamePlayHUD : MonoBehaviour
     private void UpdateTimerUI(int secondsRemaining)
     {
         TimeSpan time = TimeSpan.FromSeconds(secondsRemaining);
-        gameTimerText.text = time.ToString(@"m\:ss");
+        gameTimerText.text = $"Time : {time.Minutes:D2}m {time.Seconds:D2}s";
     }
 
     private void SpawnFloatingText(int amount, Vector3 worldPosition)
