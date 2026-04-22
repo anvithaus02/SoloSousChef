@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using DG.Tweening;
 using com.SoloSousChef.Station;
 using com.SoloSousChef.Player;
 using com.SoloSousChef.Manager;
@@ -20,10 +21,16 @@ namespace com.SoloSousChef.Order
 
     public class OrderChit : MonoBehaviour
     {
+        [Header("UI References")]
         [SerializeField] private OrderItem orderItemPrefab;
         [SerializeField] private Transform orderItemHolder;
         [SerializeField] private TextMeshProUGUI timerText;
         [SerializeField] private ActionButton serveButton;
+
+        [Header("Animation Settings")]
+        [SerializeField] private float animDuration = 0.4f;
+        [SerializeField] private Ease scaleInEase = Ease.OutBack;
+        [SerializeField] private Ease scaleOutEase = Ease.InBack;
 
         private TickTimer _timer;
         private List<OrderItemData> _orderData;
@@ -36,6 +43,7 @@ namespace com.SoloSousChef.Order
         {
             serveButton.Initialize(ButtonType.Primary, "Serve", true, OnServerButtonClick);
             ServingTable.OnPlayerAtCounter += SetPlayerZoneStatus;
+
             if (SessionManager.Instance != null)
                 SessionManager.Instance.OnPauseToggled += HandlePauseToggled;
         }
@@ -43,13 +51,17 @@ namespace com.SoloSousChef.Order
         private void OnDisable()
         {
             ServingTable.OnPlayerAtCounter -= SetPlayerZoneStatus;
+
             if (SessionManager.Instance != null)
                 SessionManager.Instance.OnPauseToggled -= HandlePauseToggled;
+
+            transform.DOKill();
         }
 
         private void HandlePauseToggled(bool paused)
         {
-            if (_timer != null) _timer.IsPaused = paused;
+            if (_timer != null)
+                _timer.IsPaused = paused;
         }
 
         public void InitializeOrderChit(List<OrderItemData> orderItemsData, OrderManager manager)
@@ -63,6 +75,11 @@ namespace com.SoloSousChef.Order
             _timer = new TickTimer(this, 0, false, (t) => timerText.text = t + "s");
 
             ValidateHand();
+
+            transform.localScale = Vector3.zero;
+            transform.DOScale(Vector3.one, animDuration)
+                     .SetEase(scaleInEase)
+                     .SetUpdate(true);
         }
 
         private void SpawnOrderItems(List<OrderItemData> orderItemsData)
@@ -141,12 +158,17 @@ namespace com.SoloSousChef.Order
             serveButton.SetInteractability(false);
 
             int totalVal = _orderData.Sum(x => x.ingredientData.scoreValue);
-
             int secondsTaken = _timer.CurrentTime;
             int finalScore = Mathf.Max(0, totalVal - secondsTaken);
 
             ScoreManager.Instance.AddScore(finalScore, transform.position);
-            _orderManager.NotifyOrderCompleted(this);
+
+            transform.DOScale(Vector3.zero, animDuration)
+                     .SetEase(scaleOutEase)
+                     .OnComplete(() =>
+                     {
+                         _orderManager.NotifyOrderCompleted(this);
+                     });
         }
 
         public void Cleanup()
@@ -156,7 +178,10 @@ namespace com.SoloSousChef.Order
                 _timer.Stop(false);
                 _timer = null;
             }
-            if (timerText != null) timerText.text = "";
+            if (timerText != null)
+                timerText.text = "";
+
+            transform.DOKill();
         }
     }
 }
