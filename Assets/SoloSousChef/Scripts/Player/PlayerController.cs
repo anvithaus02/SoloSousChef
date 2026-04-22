@@ -24,6 +24,7 @@ namespace com.SoloSousChef.Player
             {
                 Destroy(gameObject);
             }
+            SetPlayerDisplayState(false);
         }
         private void OnEnable()
         {
@@ -49,6 +50,7 @@ namespace com.SoloSousChef.Player
 
         public void SetPlayerDisplayState(bool isVisible)
         {
+            Debug.Log("Set Olayer " + isVisible);
             playerObject.SetActive(isVisible);
         }
 

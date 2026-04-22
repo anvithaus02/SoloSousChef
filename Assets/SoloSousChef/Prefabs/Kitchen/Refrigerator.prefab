@@ -336,7 +336,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d8e17858a936cd7428df1cbcfe678a71, type: 2}
   - {fileID: 11400000, guid: bf12445532f290a45a6436948cd84c3c, type: 2}
   - {fileID: 11400000, guid: 91edd53c1e535b240a8102ece2013e25, type: 2}
-  cycleDuration: 1
+  cycleDuration: 0.6
 --- !u!114 &7176041096215528324
 MonoBehaviour:
   m_ObjectHideFlags: 0

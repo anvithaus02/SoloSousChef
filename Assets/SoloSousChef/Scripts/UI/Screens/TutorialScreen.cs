@@ -10,7 +10,7 @@ namespace com.SoloSousChef.UI.Screens
         public override void Show(bool animate = true)
         {
             base.Show(animate);
-            closeButton.Initialize(ButtonType.Secondary, "CLOSE", true, OnCloseButtonClick);
+            closeButton.Initialize(ButtonType.Secondary, "Close", true, OnCloseButtonClick);
         }
 
         private void OnCloseButtonClick()
