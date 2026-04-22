@@ -196,6 +196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d30b2218cffc5414fb847688bd0fad28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerObject: {fileID: 792038099832659611}
   inputHandler: {fileID: 3172957728831100714}
   locomotion: {fileID: 6815969335618966697}
   interactionHandler: {fileID: 6477119809664787501}
@@ -226,7 +227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 7
-  rotationSmoothness: 0
+  rotationSmoothness: 10
 --- !u!114 &6477119809664787501
 MonoBehaviour:
   m_ObjectHideFlags: 0

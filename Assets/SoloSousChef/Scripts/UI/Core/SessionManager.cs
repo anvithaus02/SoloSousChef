@@ -11,7 +11,7 @@ public class SessionManager : MonoBehaviour
     private TickTimer _sessionTimer;
     public bool IsSessionActive { get; private set; }
     public bool IsPaused { get; private set; }
-    private const int sessionDuration = 10;
+    private const int sessionDuration = 180;
 
     private void Awake()
     {
@@ -25,7 +25,7 @@ public class SessionManager : MonoBehaviour
         IsPaused = false;
 
         OnSessionStarted?.Invoke();
-
+        PlayerController.Instance.SetPlayerDisplayState(true);
         _sessionTimer = new TickTimer(this, sessionDuration, true,
             (time) => OnTimerUpdated?.Invoke(Mathf.CeilToInt(time)),
             EndGameOnTimeComplete
@@ -61,6 +61,7 @@ public class SessionManager : MonoBehaviour
         IsSessionActive = false;
         _sessionTimer?.Stop(false);
         OnSessionEnded?.Invoke();
+        PlayerController.Instance.SetPlayerDisplayState(false);
     }
 
     public void EndGameOnTimeComplete()
