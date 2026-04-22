@@ -1,33 +1,33 @@
 using UnityEngine;
 using UnityEngine.UI;
-
-public class Ingredient : MonoBehaviour
+namespace com.SoloSousChef.Ingredients
 {
-    [SerializeField] private Image _ingredientSprite;
-    private IngredientData _data;
-    private bool _isProcessed;
-
-    public IngredientData Data => _data;
-    public bool IsProcessed => _isProcessed;
-
-    public void Initialize(IngredientData data, bool isProcessed = false)
+    public class Ingredient : MonoBehaviour
     {
-        _data = data;
-        _isProcessed = isProcessed;
+        [SerializeField] private Image _ingredientSprite;
 
-        UpdateVisuals();
-    }
+        public IngredientData Data => _data;
+        public bool IsProcessed => _isProcessed;
+        private IngredientData _data;
+        private bool _isProcessed;
 
-    public void SetProcessed()
-    {
-        _isProcessed = true;
-        UpdateVisuals();
-    }
+        public void Initialize(IngredientData data, bool isProcessed = false)
+        {
+            _data = data;
+            _isProcessed = isProcessed;
 
-    private void UpdateVisuals()
-    {
-        if (_data == null) return;
+            UpdateVisuals();
+        }
 
-        _ingredientSprite.sprite = _isProcessed ? _data.processedSprite : _data.rawSprite;
+        public void SetProcessed()
+        {
+            _isProcessed = true;
+            UpdateVisuals();
+        }
+
+        private void UpdateVisuals()
+        {
+            _ingredientSprite.sprite = _isProcessed ? _data.processedSprite : _data.rawSprite;
+        }
     }
 }

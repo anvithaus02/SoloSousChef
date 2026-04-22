@@ -1,155 +1,162 @@
 using UnityEngine;
-using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
-using System.Collections;
+using com.SoloSousChef.Station;
+using com.SoloSousChef.Player;
+using com.SoloSousChef.Manager;
+using com.SoloSousChef.UI.Components;
+using com.SoloSousChef.UI.Generic;
+using com.SoloSousChef.UI.Managers;
 
-[System.Serializable]
-public class OrderItemData
+namespace com.SoloSousChef.Order
 {
-    public IngredientData ingredientData;
-    public bool isDelivered;
-}
-
-public class OrderChit : MonoBehaviour
-{
-    [SerializeField] private OrderItem orderItemPrefab;
-    [SerializeField] private Transform orderItemHolder;
-    [SerializeField] private TextMeshProUGUI timerText;
-    [SerializeField] private ActionButton serveButton;
-
-    private TickTimer _timer;
-    private List<OrderItemData> _orderData;
-    private List<OrderItem> _spawnedUIItems = new List<OrderItem>();
-    private bool _isPlayerInZone = false;
-    private float _startTime;
-    private OrderManager _orderManager;
-
-    private void OnEnable()
+    [System.Serializable]
+    public class OrderItemData
     {
-        serveButton.Initialize(ButtonType.Primary, "Serve", true, OnServerButtonClick);
-        ServingTable.OnPlayerAtCounter += SetPlayerZoneStatus;
-        if (SessionManager.Instance != null)
-            SessionManager.Instance.OnPauseToggled += HandlePauseToggled;
+        public IngredientData ingredientData;
+        public bool isDelivered;
     }
 
-    private void OnDisable()
+    public class OrderChit : MonoBehaviour
     {
-        ServingTable.OnPlayerAtCounter -= SetPlayerZoneStatus;
-        if (SessionManager.Instance != null)
-            SessionManager.Instance.OnPauseToggled -= HandlePauseToggled;
-    }
+        [SerializeField] private OrderItem orderItemPrefab;
+        [SerializeField] private Transform orderItemHolder;
+        [SerializeField] private TextMeshProUGUI timerText;
+        [SerializeField] private ActionButton serveButton;
 
-    private void HandlePauseToggled(bool paused)
-    {
-        if (_timer != null) _timer.IsPaused = paused;
-    }
+        private TickTimer _timer;
+        private List<OrderItemData> _orderData;
+        private List<OrderItem> _spawnedUIItems = new List<OrderItem>();
+        private bool _isPlayerInZone = false;
+        private float _startTime;
+        private OrderManager _orderManager;
 
-    public void InitializeOrderChit(List<OrderItemData> orderItemsData, OrderManager manager)
-    {
-        _orderManager = manager;
-        _orderData = orderItemsData;
-        _startTime = Time.time;
-
-        SpawnOrderItems(orderItemsData);
-
-        _timer = new TickTimer(this, 0, false, (t) => timerText.text = t + "s");
-
-        ValidateHand();
-    }
-
-    private void SpawnOrderItems(List<OrderItemData> orderItemsData)
-    {
-        foreach (Transform child in orderItemHolder) Destroy(child.gameObject);
-        _spawnedUIItems.Clear();
-
-        foreach (OrderItemData item in orderItemsData)
+        private void OnEnable()
         {
-            OrderItem uiItem = Instantiate(orderItemPrefab, orderItemHolder);
-            uiItem.IntializeOrderItem(item.ingredientData);
-            _spawnedUIItems.Add(uiItem);
-        }
-    }
-
-    public void SetPlayerZoneStatus(bool inZone)
-    {
-        _isPlayerInZone = inZone;
-        ValidateHand();
-    }
-
-    private void ValidateHand()
-    {
-        if (!_isPlayerInZone)
-        {
-            serveButton.SetInteractability(false);
-            return;
+            serveButton.Initialize(ButtonType.Primary, "Serve", true, OnServerButtonClick);
+            ServingTable.OnPlayerAtCounter += SetPlayerZoneStatus;
+            if (SessionManager.Instance != null)
+                SessionManager.Instance.OnPauseToggled += HandlePauseToggled;
         }
 
-        var hand = PlayerController.Instance.Hand;
-        if (!hand.IsHandFull())
+        private void OnDisable()
         {
-            serveButton.SetInteractability(false);
-            return;
+            ServingTable.OnPlayerAtCounter -= SetPlayerZoneStatus;
+            if (SessionManager.Instance != null)
+                SessionManager.Instance.OnPauseToggled -= HandlePauseToggled;
         }
 
-        IngredientData heldItem = hand.GetHeldItemData();
-        bool isReadyToServe = !heldItem.RequiresProcessing || hand.IsHeldItemProcessed();
-
-        bool canServe = _orderData.Any(item => !item.isDelivered && item.ingredientData == heldItem && isReadyToServe);
-
-        serveButton.SetInteractability(canServe);
-    }
-
-    private void OnServerButtonClick()
-    {
-        var hand = PlayerController.Instance.Hand;
-        IngredientData heldItem = hand.GetHeldItemData();
-
-        for (int i = 0; i < _orderData.Count; i++)
+        private void HandlePauseToggled(bool paused)
         {
-            if (!_orderData[i].isDelivered && _orderData[i].ingredientData == heldItem)
+            if (_timer != null) _timer.IsPaused = paused;
+        }
+
+        public void InitializeOrderChit(List<OrderItemData> orderItemsData, OrderManager manager)
+        {
+            _orderManager = manager;
+            _orderData = orderItemsData;
+            _startTime = Time.time;
+
+            SpawnOrderItems(orderItemsData);
+
+            _timer = new TickTimer(this, 0, false, (t) => timerText.text = t + "s");
+
+            ValidateHand();
+        }
+
+        private void SpawnOrderItems(List<OrderItemData> orderItemsData)
+        {
+            foreach (Transform child in orderItemHolder) Destroy(child.gameObject);
+            _spawnedUIItems.Clear();
+
+            foreach (OrderItemData item in orderItemsData)
             {
-                _orderData[i].isDelivered = true;
-                _spawnedUIItems[i].SetDeliveryStatusIcon(true);
-                hand.ClearHand();
-                break;
+                OrderItem uiItem = Instantiate(orderItemPrefab, orderItemHolder);
+                uiItem.IntializeOrderItem(item.ingredientData);
+                _spawnedUIItems.Add(uiItem);
             }
         }
 
-        if (_orderData.All(x => x.isDelivered))
+        public void SetPlayerZoneStatus(bool inZone)
         {
-            CompleteOrder();
-        }
-        else
-        {
+            _isPlayerInZone = inZone;
             ValidateHand();
         }
-    }
 
-    private void CompleteOrder()
-    {
-        if (_timer != null)
-            _timer.Stop(triggerComplete: false);
-
-        serveButton.SetInteractability(false);
-
-        int totalVal = _orderData.Sum(x => x.ingredientData.scoreValue);
-
-        int secondsTaken = _timer.CurrentTime;
-        int finalScore = Mathf.Max(0, totalVal - secondsTaken);
-
-        ScoreManager.Instance.AddScore(finalScore, transform.position);
-        _orderManager.NotifyOrderCompleted(this);
-    }
-
-    public void Cleanup()
-    {
-        if (_timer != null)
+        private void ValidateHand()
         {
-            _timer.Stop(false);
-            _timer = null;
+            if (!_isPlayerInZone)
+            {
+                serveButton.SetInteractability(false);
+                return;
+            }
+
+            var hand = PlayerController.Instance.Hand;
+            if (!hand.IsHandFull())
+            {
+                serveButton.SetInteractability(false);
+                return;
+            }
+
+            IngredientData heldItem = hand.GetHeldItemData();
+            bool isReadyToServe = !heldItem.RequiresProcessing || hand.IsHeldItemProcessed();
+
+            bool canServe = _orderData.Any(item => !item.isDelivered && item.ingredientData == heldItem && isReadyToServe);
+
+            serveButton.SetInteractability(canServe);
         }
-        if (timerText != null) timerText.text = "";
+
+        private void OnServerButtonClick()
+        {
+            var hand = PlayerController.Instance.Hand;
+            IngredientData heldItem = hand.GetHeldItemData();
+
+            for (int i = 0; i < _orderData.Count; i++)
+            {
+                if (!_orderData[i].isDelivered && _orderData[i].ingredientData == heldItem)
+                {
+                    _orderData[i].isDelivered = true;
+                    _spawnedUIItems[i].SetDeliveryStatusIcon(true);
+                    hand.ClearHand();
+                    break;
+                }
+            }
+
+            if (_orderData.All(x => x.isDelivered))
+            {
+                CompleteOrder();
+            }
+            else
+            {
+                ValidateHand();
+            }
+        }
+
+        private void CompleteOrder()
+        {
+            if (_timer != null)
+                _timer.Stop(triggerComplete: false);
+
+            serveButton.SetInteractability(false);
+
+            int totalVal = _orderData.Sum(x => x.ingredientData.scoreValue);
+
+            int secondsTaken = _timer.CurrentTime;
+            int finalScore = Mathf.Max(0, totalVal - secondsTaken);
+
+            ScoreManager.Instance.AddScore(finalScore, transform.position);
+            _orderManager.NotifyOrderCompleted(this);
+        }
+
+        public void Cleanup()
+        {
+            if (_timer != null)
+            {
+                _timer.Stop(false);
+                _timer = null;
+            }
+            if (timerText != null) timerText.text = "";
+        }
     }
 }

@@ -1,57 +1,62 @@
 using UnityEngine;
 using System.Collections.Generic;
+using com.SoloSousChef.Player;
+using com.SoloSousChef.Interfaces;
 
-public class FridgeInteractionHandler : MonoBehaviour, IInteractable
+namespace com.SoloSousChef.Station
 {
-    [Header("Dependencies")]
-    [SerializeField] private FridgeCycleController cycleController;
-    [SerializeField] private FridgeView fridgeView;
-    [SerializeField] private GameObject ingredientPrefab;
-
-    [Header("Settings")]
-    [SerializeField] private List<IngredientData> availableIngredients;
-    [SerializeField] private float cycleDuration = 1.0f;
-
-    private void Awake()
+    public class FridgeInteractionHandler : MonoBehaviour, IInteractable
     {
-        cycleController.Initialize(availableIngredients, cycleDuration);
+        [Header("Dependencies")]
+        [SerializeField] private FridgeCycleController cycleController;
+        [SerializeField] private FridgeView fridgeView;
+        [SerializeField] private GameObject ingredientPrefab;
 
-        cycleController.OnIngredientChanged += fridgeView.UpdateIngredientIcon;
-        cycleController.OnCyclingStateChanged += fridgeView.SetDisplayActive;
-    }
+        [Header("Settings")]
+        [SerializeField] private List<IngredientData> availableIngredients;
+        [SerializeField] private float cycleDuration = 1.0f;
 
-    public void OnFocus(PlayerController player)
-    {
-        if (player.Hand.IsHandFull())
+        private void Awake()
         {
-            fridgeView.ShowStatusMessage("Hand Full!");
-        }
-        else
-        {
-            cycleController.StartCycle();
-        }
-    }
+            cycleController.Initialize(availableIngredients, cycleDuration);
 
-    public void OnDefocus()
-    {
-        cycleController.StopCycle();
-    }
-
-    public void Interact(PlayerController player)
-    {
-        if (player.Hand.IsHandFull())
-        {
-            fridgeView.ShowStatusMessage("Hand Full!");
-            return;
+            cycleController.OnIngredientChanged += fridgeView.UpdateIngredientIcon;
+            cycleController.OnCyclingStateChanged += fridgeView.SetDisplayActive;
         }
 
-        SpawnAndGiveIngredient(player);
-    }
+        public void OnFocus(PlayerController player)
+        {
+            if (player.Hand.IsHandFull())
+            {
+                fridgeView.ShowStatusMessage("Hand Full!");
+            }
+            else
+            {
+                cycleController.StartCycle();
+            }
+        }
 
-    private void SpawnAndGiveIngredient(PlayerController player)
-    {
-        IngredientData currentData = cycleController.GetCurrentIngredient();
-        player.Hand.SetHeldItem(currentData, false);
-        cycleController.StopCycle();
+        public void OnDefocus()
+        {
+            cycleController.StopCycle();
+        }
+
+        public void Interact(PlayerController player)
+        {
+            if (player.Hand.IsHandFull())
+            {
+                fridgeView.ShowStatusMessage("Hand Full!");
+                return;
+            }
+
+            SpawnAndGiveIngredient(player);
+        }
+
+        private void SpawnAndGiveIngredient(PlayerController player)
+        {
+            IngredientData currentData = cycleController.GetCurrentIngredient();
+            player.Hand.SetHeldItem(currentData, false);
+            cycleController.StopCycle();
+        }
     }
 }

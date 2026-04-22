@@ -1,34 +1,37 @@
+using com.SoloSousChef.UI.Components;
 using UnityEngine;
-
-public class StationVisualController : MonoBehaviour
+namespace com.SoloSousChef.Station
 {
-    [SerializeField] private IngredientProcessor processor;
-    [SerializeField] private TimerProgressBar progressBar;
-
-    private void OnEnable()
+    public class StationVisualController : MonoBehaviour
     {
-        processor.OnProcessingStarted += HandleProcessingStarted;
-        processor.OnProcessingComplete += HandleProcessingComplete;
-    }
+        [SerializeField] private IngredientProcessor processor;
+        [SerializeField] private TimerProgressBar progressBar;
 
-    private void OnDisable()
-    {
-        processor.OnProcessingStarted -= HandleProcessingStarted;
-        processor.OnProcessingComplete -= HandleProcessingComplete;
-    }
+        private void OnEnable()
+        {
+            processor.OnProcessingStarted += HandleProcessingStarted;
+            processor.OnProcessingComplete += HandleProcessingComplete;
+        }
 
-    private void HandleProcessingStarted(float duration)
-    {
-        progressBar.StartProgress(duration, TimerProgressBar.DisplayMode.Decreasing);
-    }
+        private void OnDisable()
+        {
+            processor.OnProcessingStarted -= HandleProcessingStarted;
+            processor.OnProcessingComplete -= HandleProcessingComplete;
+        }
 
-    private void HandleProcessingComplete()
-    {
-        ResetView();
-    }
+        private void HandleProcessingStarted(float duration)
+        {
+            progressBar.StartProgress(duration, TimerProgressBar.DisplayMode.Decreasing);
+        }
 
-    public void ResetView()
-    {
-        progressBar.StopProgress();
+        private void HandleProcessingComplete()
+        {
+            ResetView();
+        }
+
+        public void ResetView()
+        {
+            progressBar.StopProgress();
+        }
     }
 }

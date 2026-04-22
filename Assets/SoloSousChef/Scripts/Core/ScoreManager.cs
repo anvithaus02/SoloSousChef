@@ -1,47 +1,43 @@
 using UnityEngine;
 using System;
 
-public class ScoreManager
+namespace com.SoloSousChef.Manager
 {
-    // Standard C# Singleton pattern
-    private static ScoreManager _instance;
-    public static ScoreManager Instance => _instance ??= new ScoreManager();
-
-    // Events for UI and VFX to listen to
-    public event Action<int> OnScoreChanged;
-    public event Action<int, Vector3> OnScoreAddedWithPosition;
-
-    private int _currentScore = 0;
-    private int _highScore = 0;
-    private const string HIGH_SCORE_KEY = "HighScore";
-
-    private ScoreManager()
+    public class ScoreManager
     {
-        _highScore = PlayerPrefs.GetInt(HIGH_SCORE_KEY, 0);
-    }
+        private static ScoreManager _instance;
+        public static ScoreManager Instance => _instance ??= new ScoreManager();
+        public event Action<int> OnScoreChanged;
+        public event Action<int, Vector3> OnScoreAddedWithPosition;
+        public int GetCurrentScore() => _currentScore;
+        public int GetHighScore() => _highScore;
+        private int _currentScore = 0;
+        private int _highScore = 0;
+        private const string HIGH_SCORE_KEY = "HighScore";
 
-    public void AddScore(int amount, Vector3 worldPosition)
-    {
-        _currentScore += amount;
-        
-        if (_currentScore > _highScore)
+        private ScoreManager()
         {
-            _highScore = _currentScore;
-            PlayerPrefs.SetInt(HIGH_SCORE_KEY, _highScore);
-            PlayerPrefs.Save();
+            _highScore = PlayerPrefs.GetInt(HIGH_SCORE_KEY, 0);
         }
 
-        // Notify UI/VFX observers
-        OnScoreChanged?.Invoke(_currentScore);
-        OnScoreAddedWithPosition?.Invoke(amount, worldPosition);
-    }
+        public void AddScore(int amount, Vector3 worldPosition)
+        {
+            _currentScore += amount;
 
-    public void ResetScore()
-    {
-        _currentScore = 0;
-        OnScoreChanged?.Invoke(_currentScore);
-    }
+            if (_currentScore > _highScore)
+            {
+                _highScore = _currentScore;
+                PlayerPrefs.SetInt(HIGH_SCORE_KEY, _highScore);
+                PlayerPrefs.Save();
+            }
 
-    public int GetCurrentScore() => _currentScore;
-    public int GetHighScore() => _highScore;
+            OnScoreChanged?.Invoke(_currentScore);
+            OnScoreAddedWithPosition?.Invoke(amount, worldPosition);
+        }
+        public void ResetScore()
+        {
+            _currentScore = 0;
+            OnScoreChanged?.Invoke(_currentScore);
+        }
+    }
 }

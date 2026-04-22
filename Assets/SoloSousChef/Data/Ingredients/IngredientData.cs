@@ -1,3 +1,4 @@
+using com.SoloSousChef.Station;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewIngredient", menuName = "Kitchen/Ingredient")]

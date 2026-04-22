@@ -1,4 +1,7 @@
-public class CookingStationHandler : BaseStationHandler 
+namespace com.SoloSousChef.Station
 {
-    
+    public class CookingStationHandler : BaseStationHandler
+    {
+
+    }
 }

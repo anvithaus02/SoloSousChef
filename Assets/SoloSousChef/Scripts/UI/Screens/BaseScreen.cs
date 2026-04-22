@@ -1,40 +1,44 @@
 using UnityEngine;
 using DG.Tweening;
+using com.SoloSousChef.UI.Managers;
 
-[RequireComponent(typeof(CanvasGroup))]
-public abstract class BaseScreen : MonoBehaviour
+namespace com.SoloSousChef.UI.Screens
 {
-    public ScreenType screenType;
-    protected CanvasGroup canvasGroup;
-
-    protected virtual void Awake()
+    [RequireComponent(typeof(CanvasGroup))]
+    public abstract class BaseScreen : MonoBehaviour
     {
-        canvasGroup = GetComponent<CanvasGroup>();
-    }
+        public ScreenType screenType;
+        protected CanvasGroup canvasGroup;
 
-    public virtual void Show(bool animate = true)
-    {
-        gameObject.SetActive(true);
-        if (animate)
+        protected virtual void Awake()
         {
-            canvasGroup.alpha = 0;
-            canvasGroup.DOFade(1f, 0.3f).SetUpdate(true); 
+            canvasGroup = GetComponent<CanvasGroup>();
         }
-        else
-        {
-            canvasGroup.alpha = 1f;
-        }
-    }
 
-    public virtual void Hide(bool animate = true)
-    {
-        if (animate)
+        public virtual void Show(bool animate = true)
         {
-            canvasGroup.DOFade(0f, 0.3f).SetUpdate(true).OnComplete(() => gameObject.SetActive(false));
+            gameObject.SetActive(true);
+            if (animate)
+            {
+                canvasGroup.alpha = 0;
+                canvasGroup.DOFade(1f, 0.3f).SetUpdate(true);
+            }
+            else
+            {
+                canvasGroup.alpha = 1f;
+            }
         }
-        else
+
+        public virtual void Hide(bool animate = true)
         {
-            gameObject.SetActive(false);
+            if (animate)
+            {
+                canvasGroup.DOFade(0f, 0.3f).SetUpdate(true).OnComplete(() => gameObject.SetActive(false));
+            }
+            else
+            {
+                gameObject.SetActive(false);
+            }
         }
     }
 }

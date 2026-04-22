@@ -1,57 +1,60 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using Unity.VisualScripting;
+using com.SoloSousChef.UI.Components;
 
-public class FridgeView : MonoBehaviour
+namespace com.SoloSousChef.Station
 {
-    [SerializeField] private IngredientBubble ingredientDisplayIcon;
-    [SerializeField] private TextMeshProUGUI statusMessageText;
-    [SerializeField] private float fadeDuration = 0.5f;
-
-    [Header("State")]
-    [SerializeField] private Image fridgeIcon;
-    [SerializeField] private Sprite openIcon;
-    [SerializeField] private Sprite closeIcon;
-
-    private void Start()
+    public class FridgeView : MonoBehaviour
     {
-        SetDisplayActive(false);
-    }
+        [SerializeField] private IngredientBubble ingredientDisplayIcon;
+        [SerializeField] private TextMeshProUGUI statusMessageText;
+        [SerializeField] private float fadeDuration = 0.5f;
 
-    public void SetDisplayActive(bool isActive)
-    {
-        ingredientDisplayIcon.SetDisplayState(isActive);
-        SetFridgeState(isActive);
-    }
+        [Header("State")]
+        [SerializeField] private Image fridgeIcon;
+        [SerializeField] private Sprite openIcon;
+        [SerializeField] private Sprite closeIcon;
 
-    public void UpdateIngredientIcon(IngredientData data)
-    {
-        ingredientDisplayIcon.Initailize(data.rawSprite);
-    }
-
-    public void ShowStatusMessage(string message)
-    {
-        StopAllCoroutines();
-        StartCoroutine(MessageFadeRoutine(message));
-    }
-
-    private System.Collections.IEnumerator MessageFadeRoutine(string msg)
-    {
-        statusMessageText.text = msg;
-        statusMessageText.alpha = 1;
-        yield return new WaitForSeconds(1.0f);
-        float t = 1;
-        while (t > 0)
+        private void Start()
         {
-            t -= Time.deltaTime / fadeDuration;
-            statusMessageText.alpha = t;
-            yield return null;
+            SetDisplayActive(false);
         }
-    }
 
-    private void SetFridgeState(bool isOpen)
-    {
-        fridgeIcon.sprite = isOpen ? openIcon : closeIcon;
+        public void SetDisplayActive(bool isActive)
+        {
+            ingredientDisplayIcon.SetDisplayState(isActive);
+            SetFridgeState(isActive);
+        }
+
+        public void UpdateIngredientIcon(IngredientData data)
+        {
+            ingredientDisplayIcon.Initailize(data.rawSprite);
+        }
+
+        public void ShowStatusMessage(string message)
+        {
+            StopAllCoroutines();
+            StartCoroutine(MessageFadeRoutine(message));
+        }
+
+        private System.Collections.IEnumerator MessageFadeRoutine(string msg)
+        {
+            statusMessageText.text = msg;
+            statusMessageText.alpha = 1;
+            yield return new WaitForSeconds(1.0f);
+            float t = 1;
+            while (t > 0)
+            {
+                t -= Time.deltaTime / fadeDuration;
+                statusMessageText.alpha = t;
+                yield return null;
+            }
+        }
+
+        private void SetFridgeState(bool isOpen)
+        {
+            fridgeIcon.sprite = isOpen ? openIcon : closeIcon;
+        }
     }
 }

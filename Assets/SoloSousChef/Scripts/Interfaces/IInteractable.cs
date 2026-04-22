@@ -1,6 +1,11 @@
-public interface IInteractable
+using com.SoloSousChef.Player;
+
+namespace com.SoloSousChef.Interfaces
 {
-    void Interact(PlayerController player);
-    void OnFocus(PlayerController player);  
-    void OnDefocus();
+    public interface IInteractable
+    {
+        void Interact(PlayerController player);
+        void OnFocus(PlayerController player);
+        void OnDefocus();
+    }
 }

@@ -1,41 +1,44 @@
+using com.SoloSousChef.UI.Components;
 using UnityEngine;
-
-public class PlayerHandController : MonoBehaviour
+namespace com.SoloSousChef.Player
 {
-    [SerializeField] private IngredientBubble ingredientBubble;
-
-    private IngredientData _heldData;
-    private bool _isProcessed;
-
-    public bool IsHandFull() => _heldData != null;
-
-    private void Start()
+    public class PlayerHandController : MonoBehaviour
     {
-        UpdateVisuals();
-    }
+        [SerializeField] private IngredientBubble ingredientBubble;
 
-    public void SetHeldItem(IngredientData data, bool isProcessed)
-    {
-        _heldData = data;
-        _isProcessed = isProcessed;
-        UpdateVisuals();
-    }
+        private IngredientData _heldData;
+        private bool _isProcessed;
 
-    public IngredientData GetHeldItemData() => _heldData;
-    public bool IsHeldItemProcessed() => _isProcessed;
+        public bool IsHandFull() => _heldData != null;
 
-    public void ClearHand()
-    {
-        _heldData = null;
-        _isProcessed = false;
-        UpdateVisuals();
-    }
+        private void Start()
+        {
+            UpdateVisuals();
+        }
 
-    private void UpdateVisuals()
-    {
-        Sprite sprite = null;
-        if (_heldData != null)
-            sprite = _isProcessed ? _heldData.processedSprite : _heldData.rawSprite;
-        ingredientBubble.Initailize(sprite, _heldData == null ? 0.0f : 0.15f);
+        public void SetHeldItem(IngredientData data, bool isProcessed)
+        {
+            _heldData = data;
+            _isProcessed = isProcessed;
+            UpdateVisuals();
+        }
+
+        public IngredientData GetHeldItemData() => _heldData;
+        public bool IsHeldItemProcessed() => _isProcessed;
+
+        public void ClearHand()
+        {
+            _heldData = null;
+            _isProcessed = false;
+            UpdateVisuals();
+        }
+
+        private void UpdateVisuals()
+        {
+            Sprite sprite = null;
+            if (_heldData != null)
+                sprite = _isProcessed ? _heldData.processedSprite : _heldData.rawSprite;
+            ingredientBubble.Initailize(sprite, _heldData == null ? 0.0f : 0.15f);
+        }
     }
 }

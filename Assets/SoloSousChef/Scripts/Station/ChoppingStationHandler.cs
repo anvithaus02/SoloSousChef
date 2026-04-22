@@ -1,5 +1,8 @@
-public class ChoppingStationHandler : BaseStationHandler 
+namespace com.SoloSousChef.Station
 {
+    public class ChoppingStationHandler : BaseStationHandler
+    {
 
-  
+
+    }
 }

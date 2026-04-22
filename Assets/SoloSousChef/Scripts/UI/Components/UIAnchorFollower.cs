@@ -1,29 +1,31 @@
 using UnityEngine;
-
-public class UIAnchorFollower : MonoBehaviour
+namespace com.SoloSousChef.UI.Components
 {
-    [SerializeField] private Transform targetAnchor;
-    [SerializeField] private RectTransform movePoint;
-    [SerializeField] private Vector3 offset;
-
-    private Camera _mainCam;
-
-    private void Start()
+    public class UIAnchorFollower : MonoBehaviour
     {
-        _mainCam = Camera.main;
-    }
+        [SerializeField] private Transform targetAnchor;
+        [SerializeField] private RectTransform movePoint;
+        [SerializeField] private Vector3 offset;
 
-    private void LateUpdate()
-    {
-        if (targetAnchor == null || movePoint == null) return;
+        private Camera _mainCam;
 
-        Vector3 screenPosition = _mainCam.WorldToScreenPoint(targetAnchor.position);
-
-        if (screenPosition.z < 0)
+        private void Start()
         {
-            movePoint.gameObject.SetActive(false);
-            return;
+            _mainCam = Camera.main;
         }
-        movePoint.position = screenPosition + offset;
+
+        private void LateUpdate()
+        {
+            if (targetAnchor == null || movePoint == null) return;
+
+            Vector3 screenPosition = _mainCam.WorldToScreenPoint(targetAnchor.position);
+
+            if (screenPosition.z < 0)
+            {
+                movePoint.gameObject.SetActive(false);
+                return;
+            }
+            movePoint.position = screenPosition + offset;
+        }
     }
 }

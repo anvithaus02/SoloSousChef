@@ -1,30 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class OrderItem : MonoBehaviour
+namespace com.SoloSousChef.Order
 {
-    [SerializeField] private Image ingredientIcon;
-    [SerializeField] private TextMeshProUGUI ingredientName;
-    [SerializeField] private GameObject deliveryStatusIcon;
-
-    public void IntializeOrderItem(IngredientData ingredient)
+    public class OrderItem : MonoBehaviour
     {
-        SetIcon(ingredient.processedSprite);
-        SetDeliveryStatusIcon(false);
-    }
+        [SerializeField] private Image ingredientIcon;
+        [SerializeField] private TextMeshProUGUI ingredientName;
+        [SerializeField] private GameObject deliveryStatusIcon;
 
-    public void SetDeliveryStatusIcon(bool isDelivered)
-    {
-        deliveryStatusIcon.SetActive(isDelivered);
-    }
+        public void IntializeOrderItem(IngredientData ingredient)
+        {
+            SetIcon(ingredient.processedSprite);
+            SetDeliveryStatusIcon(false);
+        }
 
-    private void SetIcon(Sprite icon)
-    {
-        ingredientIcon.sprite = icon;
-    }
+        public void SetDeliveryStatusIcon(bool isDelivered)
+        {
+            deliveryStatusIcon.SetActive(isDelivered);
+        }
 
+        private void SetIcon(Sprite icon)
+        {
+            ingredientIcon.sprite = icon;
+        }
+
+    }
 }

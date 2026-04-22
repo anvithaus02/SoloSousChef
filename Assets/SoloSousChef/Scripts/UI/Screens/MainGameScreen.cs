@@ -1,26 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
+using com.SoloSousChef.UI.Components;
+using com.SoloSousChef.UI.Managers;
 using UnityEngine;
-
-public class MainGameScreen : BaseScreen
+namespace com.SoloSousChef.UI.Screens
 {
-    [SerializeField] private ActionButton tutorialButton;
-    [SerializeField] private ActionButton startGameButton;
-
-    private void Start()
+    public class MainGameScreen : BaseScreen
     {
-        startGameButton.Initialize(ButtonType.Primary,"Start", true, OnStartGameButtonClick);
-        tutorialButton.Initialize(ButtonType.Secondary,"Tutorial", true, OnTutorialButtonClick);
-    }
+        [SerializeField] private ActionButton tutorialButton;
+        [SerializeField] private ActionButton startGameButton;
 
-    private void OnStartGameButtonClick()
-    {
-        SessionManager.Instance.StartSession();
-        BaseScreenManager.Instance.SwitchScreen(ScreenType.MainMenuScreen, ScreenType.GamePlayScreen);
-    }
+        private void Start()
+        {
+            startGameButton.Initialize(ButtonType.Primary, "Start", true, OnStartGameButtonClick);
+            tutorialButton.Initialize(ButtonType.Secondary, "Tutorial", true, OnTutorialButtonClick);
+        }
 
-    private void OnTutorialButtonClick()
-    {
-        BaseScreenManager.Instance.SwitchScreen(ScreenType.MainMenuScreen, ScreenType.TutorialScreen);
+        private void OnStartGameButtonClick()
+        {
+            SessionManager.Instance.StartSession();
+            BaseScreenManager.Instance.SwitchScreen(ScreenType.MainMenuScreen, ScreenType.GamePlayScreen);
+        }
+
+        private void OnTutorialButtonClick()
+        {
+            BaseScreenManager.Instance.SwitchScreen(ScreenType.MainMenuScreen, ScreenType.TutorialScreen);
+        }
     }
 }

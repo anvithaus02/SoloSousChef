@@ -1,9 +1,12 @@
-public enum ScreenType
+namespace com.SoloSousChef.UI.Managers
 {
-    MainMenuScreen,
-    GamePlayScreen,
-    GamePausedScreen,
-    HighScore,
-    TimeCompletedScreen,
-    TutorialScreen
+    public enum ScreenType
+    {
+        MainMenuScreen,
+        GamePlayScreen,
+        GamePausedScreen,
+        HighScore,
+        TimeCompletedScreen,
+        TutorialScreen
+    }
 }

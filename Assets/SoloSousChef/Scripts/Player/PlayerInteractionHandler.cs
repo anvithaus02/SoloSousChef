@@ -1,35 +1,34 @@
+using com.SoloSousChef.Interfaces;
 using UnityEngine;
-
-public class PlayerInteractionHandler : MonoBehaviour
+namespace com.SoloSousChef.Player
 {
-    [SerializeField] private PlayerHandController handController;
-    
-    private IInteractable _currentInteractable;
-
-    // These will be called by the Sensor via the Orchestrator (Controller)
-    public void HandleInteractableDetected(IInteractable interactable, PlayerController player)
+    public class PlayerInteractionHandler : MonoBehaviour
     {
-        if (_currentInteractable != null && _currentInteractable != interactable)
+        [SerializeField] private PlayerHandController handController;
+
+        private IInteractable _currentInteractable;
+        public void HandleInteractableDetected(IInteractable interactable, PlayerController player)
         {
-            _currentInteractable.OnDefocus();
+            if (_currentInteractable != null && _currentInteractable != interactable)
+            {
+                _currentInteractable.OnDefocus();
+            }
+
+            _currentInteractable = interactable;
+            _currentInteractable?.OnFocus(player);
         }
 
-        _currentInteractable = interactable;
-        _currentInteractable?.OnFocus(player);
-    }
-
-    public void HandleInteractableLost(IInteractable interactable)
-    {
-        if (_currentInteractable == interactable)
+        public void HandleInteractableLost(IInteractable interactable)
         {
-            _currentInteractable.OnDefocus();
-            _currentInteractable = null;
+            if (_currentInteractable == interactable)
+            {
+                _currentInteractable.OnDefocus();
+                _currentInteractable = null;
+            }
         }
-    }
-
-    // Triggered by the InputHandler
-    public void PerformInteraction(PlayerController player)
-    {
-        _currentInteractable?.Interact(player);
+        public void PerformInteraction(PlayerController player)
+        {
+            _currentInteractable?.Interact(player);
+        }
     }
 }

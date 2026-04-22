@@ -1,30 +1,34 @@
 using UnityEngine.UI;
 using UnityEngine;
-
-public class TrashCan : MonoBehaviour, IInteractable
+using com.SoloSousChef.Interfaces;
+using com.SoloSousChef.Player;
+namespace com.SoloSousChef.Station
 {
-    [SerializeField] private Image trashBinIcon;
-    [SerializeField] private Sprite openIcon;
-    [SerializeField] private Sprite closeIcon;
-    public void OnFocus(PlayerController player)
+    public class TrashCan : MonoBehaviour, IInteractable
     {
-        SetBinState(true);
-    }
-    public void OnDefocus()
-    {
-        SetBinState(false);
-    }
-
-    public void Interact(PlayerController player)
-    {
-        if (player.Hand.IsHandFull())
+        [SerializeField] private Image trashBinIcon;
+        [SerializeField] private Sprite openIcon;
+        [SerializeField] private Sprite closeIcon;
+        public void OnFocus(PlayerController player)
         {
-            player.Hand.ClearHand();
+            SetBinState(true);
         }
-    }
+        public void OnDefocus()
+        {
+            SetBinState(false);
+        }
 
-    private void SetBinState(bool isOpen)
-    {
-        trashBinIcon.sprite = isOpen ? openIcon : closeIcon;
+        public void Interact(PlayerController player)
+        {
+            if (player.Hand.IsHandFull())
+            {
+                player.Hand.ClearHand();
+            }
+        }
+
+        private void SetBinState(bool isOpen)
+        {
+            trashBinIcon.sprite = isOpen ? openIcon : closeIcon;
+        }
     }
 }

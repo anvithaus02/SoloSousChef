@@ -1,27 +1,29 @@
 using UnityEngine;
 using System;
-
-public class PlayerInputHandler : MonoBehaviour
+namespace com.SoloSousChef.Player
 {
-    public event Action OnInteractPressed;
-    public event Action OnSelectionPressed;
-
-    public Vector2 MovementInput { get; private set; }
-
-    private void Update()
+    public class PlayerInputHandler : MonoBehaviour
     {
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
-        MovementInput = new Vector2(horizontal, vertical).normalized;
+        public event Action OnInteractPressed;
+        public event Action OnSelectionPressed;
 
-        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Space))
-        {
-            OnInteractPressed?.Invoke();
-        }
+        public Vector2 MovementInput { get; private set; }
 
-        if (Input.GetKeyDown(KeyCode.Q))
+        private void Update()
         {
-            OnSelectionPressed?.Invoke();
+            float horizontal = Input.GetAxisRaw("Horizontal");
+            float vertical = Input.GetAxisRaw("Vertical");
+            MovementInput = new Vector2(horizontal, vertical).normalized;
+
+            if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Space))
+            {
+                OnInteractPressed?.Invoke();
+            }
+
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                OnSelectionPressed?.Invoke();
+            }
         }
     }
 }

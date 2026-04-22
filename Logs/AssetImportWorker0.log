@@ -2962,3 +2962,279 @@ AssetImportParameters requested are different than current active one (requested
   custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
   custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.007610 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for Android target not found
+Refreshing native plugins compatible for Editor in 1.34 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+[Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Cannot connect to Unity Package Manager local server
+Mono: successfully reloaded assembly
+- Completed reload, in  2.730 seconds
+Domain Reload Profiling:
+	ReloadAssembly (2732ms)
+		BeginReloadAssembly (258ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (8ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (64ms)
+		EndReloadAssembly (2312ms)
+			LoadAssemblies (165ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (499ms)
+			ReleaseScriptCaches (4ms)
+			RebuildScriptCaches (113ms)
+			SetupLoadedEditorAssemblies (1428ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (39ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (2ms)
+				BeforeProcessingInitializeOnLoad (115ms)
+				ProcessInitializeOnLoadAttributes (1211ms)
+				ProcessInitializeOnLoadMethodAttributes (46ms)
+				AfterProcessingInitializeOnLoad (14ms)
+				EditorAssembliesLoaded (1ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (20ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 1.40 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3162 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 21 unused Assets / (22.0 KB). Loaded Objects now: 3794.
+Memory consumption went from 115.6 MB to 115.6 MB.
+Total: 7.032500 ms (FindLiveObjects: 0.702000 ms CreateObjectMapping: 0.393900 ms MarkObjects: 5.883000 ms  DeleteObjects: 0.051200 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+  custom:CustomObjectIndexerAttribute: bc11b3a6c3213fcdd17b65e7da85e133 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 423.007997 seconds.
+  path: Assets/SoloSousChef/Sprites/Ingredients/T_ChoppedTomato.png
+  artifactKey: Guid(90aed60305b705a488d4b0c079a53091) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/SoloSousChef/Sprites/Ingredients/T_ChoppedTomato.png using Guid(90aed60305b705a488d4b0c079a53091) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd479251a491f1195599b1fb534a902b7') in 0.219147 seconds 
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 7.462419 seconds.
+  path: Assets/SoloSousChef/Sprites/Ingredients/T_ChoppedTomato.png
+  artifactKey: Guid(90aed60305b705a488d4b0c079a53091) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/SoloSousChef/Sprites/Ingredients/T_ChoppedTomato.png using Guid(90aed60305b705a488d4b0c079a53091) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '65a711c8eb00f55321cf1ccefb05ab21') in 0.041708 seconds 
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 5.827674 seconds.
+  path: Assets/SoloSousChef/Sprites/Ingredients/T_Cheese.png
+  artifactKey: Guid(00da8108cbf60484ca6fe61808563d6c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/SoloSousChef/Sprites/Ingredients/T_Cheese.png using Guid(00da8108cbf60484ca6fe61808563d6c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '150acd0ca073f61fb7e6264125559dd8') in 0.050228 seconds 
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 8.688346 seconds.
+  path: Assets/SoloSousChef/Sprites/Ingredients/T_RawMeat.png
+  artifactKey: Guid(e02301692bb66694c81192727ed5d59e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/SoloSousChef/Sprites/Ingredients/T_RawMeat.png using Guid(e02301692bb66694c81192727ed5d59e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ec1f8fd85191c339066eef36ae83a994') in 0.050210 seconds 
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 5.754761 seconds.
+  path: Assets/SoloSousChef/Sprites/Ingredients/T_Tomato.png
+  artifactKey: Guid(7a6a0c33aa009254985e3e77d8e93309) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/SoloSousChef/Sprites/Ingredients/T_Tomato.png using Guid(7a6a0c33aa009254985e3e77d8e93309) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '37b782eafe024b8669497bff3a1bac16') in 0.048731 seconds 
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 192.497567 seconds.
+  path: Assets/SoloSousChef/Sprites/UI/Icons/T_PauseButton.png
+  artifactKey: Guid(cad1afd2648c73249866c551142bc816) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/SoloSousChef/Sprites/UI/Icons/T_PauseButton.png using Guid(cad1afd2648c73249866c551142bc816) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3ac3415979ca284998a124ff5af76963') in 0.037289 seconds 
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 6.370423 seconds.
+  path: Assets/SoloSousChef/Sprites/UI/Icons/T_QuitButton.png
+  artifactKey: Guid(d3b55ffad1eea5b4186750cb1ca5219e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/SoloSousChef/Sprites/UI/Icons/T_QuitButton.png using Guid(d3b55ffad1eea5b4186750cb1ca5219e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9894178e4f0aab3ebdeba2629ab0aa4b') in 0.031492 seconds 
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 8.685537 seconds.
+  path: Assets/SoloSousChef/Sprites/UI/Icons/T_ThoughtBubble.png
+  artifactKey: Guid(21f7d20411c6b884fae6748ef167a02d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/SoloSousChef/Sprites/UI/Icons/T_ThoughtBubble.png using Guid(21f7d20411c6b884fae6748ef167a02d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7c7262eb7a45739488247c0b6557ee2e') in 0.094798 seconds 
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 15.666905 seconds.
+  path: Assets/SoloSousChef/Sprites/UI/Icons/T_TimesUpIcon.png
+  artifactKey: Guid(4c1890907e6767a4480b3cfd2328c6dc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/SoloSousChef/Sprites/UI/Icons/T_TimesUpIcon.png using Guid(4c1890907e6767a4480b3cfd2328c6dc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '06ae300ba9f7ec5c29a009c5e9ab9e0c') in 0.256608 seconds 
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 7.474329 seconds.
+  path: Assets/SoloSousChef/Sprites/UI/Icons/T_TimesUpIcon.png
+  artifactKey: Guid(4c1890907e6767a4480b3cfd2328c6dc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/SoloSousChef/Sprites/UI/Icons/T_TimesUpIcon.png using Guid(4c1890907e6767a4480b3cfd2328c6dc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e3643563d9d6bbdf4189eb3f178049c0') in 0.039630 seconds 
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 25.660425 seconds.
+  path: Assets/SoloSousChef/Sprites/UI/Kitchen/T_PlayerIcon.png
+  artifactKey: Guid(831fea76932de7b4d8ece3659ce9e8e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/SoloSousChef/Sprites/UI/Kitchen/T_PlayerIcon.png using Guid(831fea76932de7b4d8ece3659ce9e8e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'da254517f13dfcf479f161dc0e15c3df') in 0.293736 seconds 
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 121.557570 seconds.
+  path: Assets/SoloSousChef/Sprites/UI/Kitchen/T_PlayerIcon.png
+  artifactKey: Guid(831fea76932de7b4d8ece3659ce9e8e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/SoloSousChef/Sprites/UI/Kitchen/T_PlayerIcon.png using Guid(831fea76932de7b4d8ece3659ce9e8e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '90af37b0439b4059516d3481cea97d06') in 0.133678 seconds 
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 113.228095 seconds.
+  path: Assets/SoloSousChef/Sprites/UI/BG/T_ScoreBG.png
+  artifactKey: Guid(f4a304f6f1b6d5645b4820c733b4b443) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/SoloSousChef/Sprites/UI/BG/T_ScoreBG.png using Guid(f4a304f6f1b6d5645b4820c733b4b443) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c691b012c88372532a2b089764970ae2') in 0.097874 seconds 
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 7.404298 seconds.
+  path: Assets/SoloSousChef/Sprites/UI/BG/T_BestScoreBG.png
+  artifactKey: Guid(3b7daf3917be355468c4339d571ae3a1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/SoloSousChef/Sprites/UI/BG/T_BestScoreBG.png using Guid(3b7daf3917be355468c4339d571ae3a1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3b3828cb67d36162c00cb5a1c6c01c46') in 0.052298 seconds 
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 6.958512 seconds.
+  path: Assets/SoloSousChef/Sprites/UI/BG/T_ProgressBarBG.png
+  artifactKey: Guid(1897d8f839430d84a91b9ce1c3662a64) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/SoloSousChef/Sprites/UI/BG/T_ProgressBarBG.png using Guid(1897d8f839430d84a91b9ce1c3662a64) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '01a43b7d15327f2cb4f744d4d60a1a9a') in 0.054803 seconds 
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 9.997748 seconds.
+  path: Assets/SoloSousChef/Sprites/UI/BG/T_ProgressBarFillerBG.png
+  artifactKey: Guid(b5d817900dadbf74bb1913f5495d5c11) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/SoloSousChef/Sprites/UI/BG/T_ProgressBarFillerBG.png using Guid(b5d817900dadbf74bb1913f5495d5c11) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ce82ca70d114e3838ab09a26aad691cd') in 0.031567 seconds 
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 128.545689 seconds.
+  path: Assets/SoloSousChef/Font/Bevan-Regular SDF.asset
+  artifactKey: Guid(cfe18ee6bb996a0479249c6975736801) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/SoloSousChef/Font/Bevan-Regular SDF.asset using Guid(cfe18ee6bb996a0479249c6975736801) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9af5545b782223f4a3c059cfbc3896cb') in 0.695879 seconds 
+Number of asset objects unloaded after import = 6
+========================================================================
+Received Import Request.
+  Time since last request: 29.963656 seconds.
+  path: Assets/SoloSousChef/Scripts/Core/ScoreManager.cs
+  artifactKey: Guid(53bf4f1e0be05b343ae22f3f54cdac4d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/SoloSousChef/Scripts/Core/ScoreManager.cs using Guid(53bf4f1e0be05b343ae22f3f54cdac4d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e8c2e82120495207f99fad53686aecc2') in 0.009583 seconds 
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 307.244827 seconds.
+  path: Assets/SoloSousChef/Scripts/Fridge/FridgeView.cs
+  artifactKey: Guid(27d85d8e4c8b82b4a89611b206312446) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/SoloSousChef/Scripts/Fridge/FridgeView.cs using Guid(27d85d8e4c8b82b4a89611b206312446) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5371d5ccff3729ef06f365af4d2f0773') in 0.011731 seconds 
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 131.904041 seconds.
+  path: Assets/SoloSousChef/Scripts/Orders/OrderChit.cs
+  artifactKey: Guid(4b596cc3b3434c1479a59e81ad7507d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/SoloSousChef/Scripts/Orders/OrderChit.cs using Guid(4b596cc3b3434c1479a59e81ad7507d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '01ff706624fe28427e025e606b3aaf33') in 0.011489 seconds 
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 42.395246 seconds.
+  path: Assets/SoloSousChef/Scripts/Orders/OrderItem.cs
+  artifactKey: Guid(ce4ef6fc7b73f1a4ba635c5ec4f6fa70) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/SoloSousChef/Scripts/Orders/OrderItem.cs using Guid(ce4ef6fc7b73f1a4ba635c5ec4f6fa70) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00afd5700b43e7a4600b376c57303a34') in 0.012357 seconds 
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 48.374381 seconds.
+  path: Assets/SoloSousChef/Scripts/Orders/OrderManager.cs
+  artifactKey: Guid(7e02538d1238dea4f8571d10a54ff384) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/SoloSousChef/Scripts/Orders/OrderManager.cs using Guid(7e02538d1238dea4f8571d10a54ff384) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9fa48e9c322406030aa4c98d5c769469') in 0.014390 seconds 
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 167.271011 seconds.
+  path: Assets/SoloSousChef/Scripts/Player/PlayerController.cs
+  artifactKey: Guid(d30b2218cffc5414fb847688bd0fad28) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/SoloSousChef/Scripts/Player/PlayerController.cs using Guid(d30b2218cffc5414fb847688bd0fad28) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1c96ca1a494926c3fab6626bae5520bb') in 0.011984 seconds 
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 56.477515 seconds.
+  path: Assets/SoloSousChef/Scripts/Player/PlayerHandController.cs
+  artifactKey: Guid(5f7d0868f6e039d4d8559c20ed3f4527) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/SoloSousChef/Scripts/Player/PlayerHandController.cs using Guid(5f7d0868f6e039d4d8559c20ed3f4527) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '56ff62eecfa1cd4e219690657690c478') in 0.028531 seconds 
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 10.500497 seconds.
+  path: Assets/SoloSousChef/Scripts/Player/PlayerInputHandler.cs
+  artifactKey: Guid(d40e8473fe5e3a24387e2bc20e5a5c44) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/SoloSousChef/Scripts/Player/PlayerInputHandler.cs using Guid(d40e8473fe5e3a24387e2bc20e5a5c44) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0905203a363b8841ddf75a7b690dfd5b') in 0.127193 seconds 
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 35.873953 seconds.
+  path: Assets/SoloSousChef/Scripts/Player/PlayerLocomotion.cs
+  artifactKey: Guid(c1c81b56b73187942b6b13308904c1c0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/SoloSousChef/Scripts/Player/PlayerLocomotion.cs using Guid(c1c81b56b73187942b6b13308904c1c0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b10f2183a460324dfd89d1eb6fdc6e2c') in 0.028949 seconds 
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 22.124927 seconds.
+  path: Assets/SoloSousChef/Scripts/Station/BaseStationHandler.cs
+  artifactKey: Guid(ee22a27b3873eca4cab1d29ed890f2e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/SoloSousChef/Scripts/Station/BaseStationHandler.cs using Guid(ee22a27b3873eca4cab1d29ed890f2e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8d6c24d8bef152fdd641dbd85deee407') in 0.011917 seconds 
+Number of asset objects unloaded after import = 0

@@ -1,19 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
+using com.SoloSousChef.UI.Components;
+using com.SoloSousChef.UI.Managers;
 using UnityEngine;
-
-public class TutorialScreen : BaseScreen
+namespace com.SoloSousChef.UI.Screens
 {
-    [SerializeField] private ActionButton closeButton;
-
-    public override void Show(bool animate = true)
+    public class TutorialScreen : BaseScreen
     {
-        base.Show(animate);
-        closeButton.Initialize(ButtonType.Secondary,"CLOSE", true, OnCloseButtonClick);
-    }
+        [SerializeField] private ActionButton closeButton;
 
-    private void OnCloseButtonClick()
-    {
-        BaseScreenManager.Instance.SwitchScreen(ScreenType.TutorialScreen, ScreenType.MainMenuScreen);
+        public override void Show(bool animate = true)
+        {
+            base.Show(animate);
+            closeButton.Initialize(ButtonType.Secondary, "CLOSE", true, OnCloseButtonClick);
+        }
+
+        private void OnCloseButtonClick()
+        {
+            BaseScreenManager.Instance.SwitchScreen(ScreenType.TutorialScreen, ScreenType.MainMenuScreen);
+        }
     }
 }

@@ -1,30 +1,35 @@
-using System.Collections;
-using System.Collections.Generic;
+
+using com.SoloSousChef.Manager;
+using com.SoloSousChef.Order;
+using com.SoloSousChef.UI.Components;
+using com.SoloSousChef.UI.Managers;
 using TMPro;
 using UnityEngine;
-
-public class TimeCompletedScreen : BaseScreen
+namespace com.SoloSousChef.UI.Screens
 {
-    [SerializeField] private TextMeshProUGUI _scoreInfoText;
-    [SerializeField] private ActionButton _quitButton;
-
-    private void Start()
+    public class TimeCompletedScreen : BaseScreen
     {
-        Initialze();
-    }
-    public void Initialze()
-    {
-        int highScore = ScoreManager.Instance.GetHighScore();
-        int score = ScoreManager.Instance.GetCurrentScore();
-        _scoreInfoText.text = $"Best Score : {highScore}\n" + $"Current Score : {score}";
+        [SerializeField] private TextMeshProUGUI _scoreInfoText;
+        [SerializeField] private ActionButton _quitButton;
 
-        _quitButton.Initialize(ButtonType.Secondary, "Quit", true, OnQuitGameButtonClick);
-    }
+        private void Start()
+        {
+            Initialze();
+        }
+        public void Initialze()
+        {
+            int highScore = ScoreManager.Instance.GetHighScore();
+            int score = ScoreManager.Instance.GetCurrentScore();
+            _scoreInfoText.text = $"Best Score : {highScore}\n" + $"Current Score : {score}";
 
-    private void OnQuitGameButtonClick()
-    {
-        SessionManager.Instance.EndSession();
-        OrderManager.Instance.ClearAllOrders();
-        BaseScreenManager.Instance.SwitchScreen(ScreenType.TimeCompletedScreen, ScreenType.MainMenuScreen);
+            _quitButton.Initialize(ButtonType.Secondary, "Quit", true, OnQuitGameButtonClick);
+        }
+
+        private void OnQuitGameButtonClick()
+        {
+            SessionManager.Instance.EndSession();
+            OrderManager.Instance.ClearAllOrders();
+            BaseScreenManager.Instance.SwitchScreen(ScreenType.TimeCompletedScreen, ScreenType.MainMenuScreen);
+        }
     }
 }

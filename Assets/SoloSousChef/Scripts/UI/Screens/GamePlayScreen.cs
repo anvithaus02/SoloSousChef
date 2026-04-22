@@ -1,21 +1,26 @@
+using com.SoloSousChef.Manager;
+using com.SoloSousChef.Order;
+using com.SoloSousChef.UI.Components;
 using UnityEngine;
-
-public class GamePlayScreen : BaseScreen
+namespace com.SoloSousChef.UI.Screens
 {
-    [SerializeField] private GamePlayHUD gamePlayHUD;
-
-    public override void Show(bool animate = true)
+    public class GamePlayScreen : BaseScreen
     {
-        base.Show(animate);
-        Initialize();
-    }
+        [SerializeField] private GamePlayHUD gamePlayHUD;
 
-    private void Initialize()
-    {
-        ScoreManager.Instance.ResetScore();
-        
-        gamePlayHUD.Initialize();
-        OrderManager.Instance.InitializeAllOrders();
-        
+        public override void Show(bool animate = true)
+        {
+            base.Show(animate);
+            Initialize();
+        }
+
+        private void Initialize()
+        {
+            ScoreManager.Instance.ResetScore();
+
+            gamePlayHUD.Initialize();
+            OrderManager.Instance.InitializeAllOrders();
+
+        }
     }
 }

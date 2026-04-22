@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using com.SoloSousChef.UI.Components;
 
 [System.Serializable]
 public class ButtonVisualData

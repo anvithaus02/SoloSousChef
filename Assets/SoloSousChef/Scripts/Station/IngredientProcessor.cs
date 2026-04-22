@@ -1,44 +1,47 @@
 using UnityEngine;
 using System;
-
-public class IngredientProcessor : MonoBehaviour
+using com.SoloSousChef.UI.Generic;
+namespace com.SoloSousChef.Station
 {
-    public event Action<float> OnProcessingStarted; 
-    public event Action OnProcessingComplete;
-
-    private IngredientData _currentData;
-    private TickTimer _processorTimer;
-    
-    public bool IsComplete { get; private set; }
-    public bool IsBusy => _processorTimer != null && _processorTimer.IsRunning;
-
-    public void StartProcessing(IngredientData data)
+    public class IngredientProcessor : MonoBehaviour
     {
-        _currentData = data;
-        IsComplete = false;
+        public event Action<float> OnProcessingStarted;
+        public event Action OnProcessingComplete;
 
-        OnProcessingStarted?.Invoke(data.processingTime);
+        private IngredientData _currentData;
+        private TickTimer _processorTimer;
 
-        _processorTimer = new TickTimer(this, (int)data.processingTime, true, 
-            null, 
-            CompleteProcessing
-        );
-    }
+        public bool IsComplete { get; private set; }
+        public bool IsBusy => _processorTimer != null && _processorTimer.IsRunning;
 
-    public IngredientData GetProcessedData()
-    {
-        return _currentData;
-    }
+        public void StartProcessing(IngredientData data)
+        {
+            _currentData = data;
+            IsComplete = false;
 
-    private void CompleteProcessing()
-    {
-        IsComplete = true;
-        OnProcessingComplete?.Invoke();
-    }
+            OnProcessingStarted?.Invoke(data.processingTime);
 
-    public void Reset()
-    {
-        if (_processorTimer != null) _processorTimer.Stop(false);
-        IsComplete = false;
+            _processorTimer = new TickTimer(this, (int)data.processingTime, true,
+                null,
+                CompleteProcessing
+            );
+        }
+
+        public IngredientData GetProcessedData()
+        {
+            return _currentData;
+        }
+
+        private void CompleteProcessing()
+        {
+            IsComplete = true;
+            OnProcessingComplete?.Invoke();
+        }
+
+        public void Reset()
+        {
+            if (_processorTimer != null) _processorTimer.Stop(false);
+            IsComplete = false;
+        }
     }
 }

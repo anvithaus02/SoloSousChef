@@ -4,83 +4,86 @@ using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
 
-public enum ButtonType
+namespace com.SoloSousChef.UI.Components
 {
-    Primary,
-    Secondary,
-    Quit,
-    Pause
-}
-public class ActionButton : MonoBehaviour
-{
-    [SerializeField] private Button actionButton;
-    [SerializeField] private RectTransform pressAnimTransform;
-    [SerializeField] private TextMeshProUGUI buttonText;
-    [SerializeField] private Image buttonBG;
-    [SerializeField] private ButtonConfigurationSO buttonConfig;
-
-
-    private Action _onButtonClickCallback;
-
-    private void OnEnable()
+    public enum ButtonType
     {
-        actionButton.onClick.AddListener(HandleButtonClick);
+        Primary,
+        Secondary,
+        Quit,
+        Pause
     }
-
-    private void OnDisable()
+    public class ActionButton : MonoBehaviour
     {
-        actionButton.onClick.RemoveListener(HandleButtonClick);
-        pressAnimTransform.DOKill();
-    }
+        [SerializeField] private Button actionButton;
+        [SerializeField] private RectTransform pressAnimTransform;
+        [SerializeField] private TextMeshProUGUI buttonText;
+        [SerializeField] private Image buttonBG;
+        [SerializeField] private ButtonConfigurationSO buttonConfig;
 
-    public void Initialize(ButtonType buttonType, string text, bool isInteractable, Action onButtonClick)
-    {
-        SetButtonUI(buttonType);
-        SetButtonTextState(text);
-        actionButton.interactable = isInteractable;
-        _onButtonClickCallback = onButtonClick;
-    }
 
-    public void SetInteractability(bool isInteractable)
-    {
-        actionButton.interactable = isInteractable;
+        private Action _onButtonClickCallback;
 
-        Color textColor = buttonText.color;
-        textColor.a = isInteractable ? 1.0f : 0.5f;
-        buttonText.color = textColor;
-    }
-
-    private void SetButtonUI(ButtonType buttonType)
-    {
-        ButtonVisualData data = buttonConfig.GetData(buttonType);
-        buttonBG.sprite = data.buttonSprite;
-        buttonText.color = data.fontColor;
-    }
-
-    private void SetButtonTextState(string text)
-    {
-        bool isTextPresent = !string.IsNullOrEmpty(text);
-        buttonText.gameObject.SetActive(isTextPresent);
-
-        if (isTextPresent)
+        private void OnEnable()
         {
-            buttonText.text = text;
+            actionButton.onClick.AddListener(HandleButtonClick);
         }
-    }
 
-    private void HandleButtonClick()
-    {
-        PlayPressAnim();
-        _onButtonClickCallback?.Invoke();
-    }
+        private void OnDisable()
+        {
+            actionButton.onClick.RemoveListener(HandleButtonClick);
+            pressAnimTransform.DOKill();
+        }
 
-    private void PlayPressAnim()
-    {
-        if (pressAnimTransform == null)
-            return;
+        public void Initialize(ButtonType buttonType, string text, bool isInteractable, Action onButtonClick)
+        {
+            SetButtonUI(buttonType);
+            SetButtonTextState(text);
+            actionButton.interactable = isInteractable;
+            _onButtonClickCallback = onButtonClick;
+        }
 
-        pressAnimTransform.localScale = Vector3.one;
-        pressAnimTransform.DOPunchScale(new Vector3(-0.1f, -0.1f, -0.1f), 0.1f, 0, 0)
-                          .SetUpdate(true);
+        public void SetInteractability(bool isInteractable)
+        {
+            actionButton.interactable = isInteractable;
+
+            Color textColor = buttonText.color;
+            textColor.a = isInteractable ? 1.0f : 0.5f;
+            buttonText.color = textColor;
+        }
+
+        private void SetButtonUI(ButtonType buttonType)
+        {
+            ButtonVisualData data = buttonConfig.GetData(buttonType);
+            buttonBG.sprite = data.buttonSprite;
+            buttonText.color = data.fontColor;
+        }
+
+        private void SetButtonTextState(string text)
+        {
+            bool isTextPresent = !string.IsNullOrEmpty(text);
+            buttonText.gameObject.SetActive(isTextPresent);
+
+            if (isTextPresent)
+            {
+                buttonText.text = text;
+            }
+        }
+
+        private void HandleButtonClick()
+        {
+            PlayPressAnim();
+            _onButtonClickCallback?.Invoke();
+        }
+
+        private void PlayPressAnim()
+        {
+            if (pressAnimTransform == null)
+                return;
+
+            pressAnimTransform.localScale = Vector3.one;
+            pressAnimTransform.DOPunchScale(new Vector3(-0.1f, -0.1f, -0.1f), 0.1f, 0, 0)
+                              .SetUpdate(true);
+        }
     }
 }
