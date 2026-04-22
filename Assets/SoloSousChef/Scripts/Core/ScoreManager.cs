@@ -15,7 +15,6 @@ public class ScoreManager
     private int _highScore = 0;
     private const string HIGH_SCORE_KEY = "HighScore";
 
-    // Constructor - Logic moved here from Awake
     private ScoreManager()
     {
         _highScore = PlayerPrefs.GetInt(HIGH_SCORE_KEY, 0);

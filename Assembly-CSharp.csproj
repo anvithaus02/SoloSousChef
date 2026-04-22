@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="Assets\SoloSousChef\Scripts\Player\PlayerHandController.cs" />
     <Compile Include="Assets\SoloSousChef\Scripts\Station\ChoppingStationHandler.cs" />
+    <Compile Include="Assets\SoloSousChef\Scripts\UI\Components\IngredientBubble.cs" />
     <Compile Include="Assets\SoloSousChef\Scripts\UI\Components\ActionButton.cs" />
     <Compile Include="Assets\SoloSousChef\Data\Ingredients\IngredientData.cs" />
     <Compile Include="Assets\SoloSousChef\Scripts\Station\StationVisualController.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Assets\SoloSousChef\Scripts\Interfaces\IInteractable.cs" />
     <Compile Include="Assets\SoloSousChef\Scripts\Player\PlayerInteractionSensor.cs" />
     <Compile Include="Assets\SoloSousChef\Scripts\Station\CookingStationHandler.cs" />
+    <Compile Include="Assets\SoloSousChef\Data\UI\ButtonConfigurationSO.cs" />
     <Compile Include="Assets\SoloSousChef\Scripts\UI\Screens\MainGameScreen.cs" />
     <Compile Include="Assets\SoloSousChef\Scripts\Station\BaseStationHandler.cs" />
     <Compile Include="Assets\SoloSousChef\Scripts\UI\Generic\TickTimer.cs" />
@@ -89,6 +91,7 @@
     <Compile Include="Assets\SoloSousChef\Scripts\Station\ServingTable.cs" />
     <Compile Include="Assets\SoloSousChef\Scripts\Fridge\FridgeInteractionHandler.cs" />
     <Compile Include="Assets\SoloSousChef\Scripts\Orders\OrderChit.cs" />
+    <Compile Include="Assets\SoloSousChef\Scripts\UI\Components\UIAnchorFollower.cs" />
     <Compile Include="Assets\SoloSousChef\Scripts\UI\Screens\GamePlayScreen.cs" />
     <Compile Include="Assets\SoloSousChef\Scripts\UI\Screens\TutorialScreen.cs" />
     <Compile Include="Assets\SoloSousChef\Scripts\Player\PlayerInteractionHandler.cs" />
@@ -99,9 +102,7 @@
     <Compile Include="Assets\SoloSousChef\Scripts\UI\Screens\BaseScreenManager.cs" />
     <Compile Include="Assets\SoloSousChef\Scripts\Player\PlayerController.cs" />
     <Compile Include="Assets\SoloSousChef\Scripts\Station\IngredientProcessor.cs" />
-    <Compile Include="Assets\SoloSousChef\Data\UI\ButtonConfigurationSO.cs" />
-    <Compile Include="Assets\SoloSousChef\Scripts\UI\Components\IngredientBubble.cs" />
-    <Compile Include="Assets\SoloSousChef\Scripts\UI\Components\UIAnchorFollower.cs" />
+    <Compile Include="Assets\SoloSousChef\Scripts\UI\Screens\TimeCompletedScreen.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -967,6 +968,7 @@
     <ProjectReference Include="Unity.TextMeshPro.csproj" />
     <ProjectReference Include="Unity.VisualScripting.State.Editor.csproj" />
     <ProjectReference Include="Unity.VisualScripting.SettingsProvider.Editor.csproj" />
+    <ProjectReference Include="Unity.2D.Sprite.Editor.csproj" />
     <ProjectReference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection.csproj" />
     <ProjectReference Include="Unity.VisualScripting.Flow.csproj" />
     <ProjectReference Include="UnityEditor.UI.csproj" />
@@ -977,7 +979,6 @@
     <ProjectReference Include="Unity.VisualScripting.State.csproj" />
     <ProjectReference Include="Unity.VisualScripting.Core.csproj" />
     <ProjectReference Include="Unity.EditorCoroutines.Editor.csproj" />
-    <ProjectReference Include="Unity.2D.Sprite.Editor.csproj" />
   </ItemGroup>
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
   <ItemGroup>

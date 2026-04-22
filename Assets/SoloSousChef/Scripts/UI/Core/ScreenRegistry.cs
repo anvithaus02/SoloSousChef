@@ -4,6 +4,6 @@ public enum ScreenType
     GamePlayScreen,
     GamePausedScreen,
     HighScore,
-    GameOver,
+    TimeCompletedScreen,
     TutorialScreen
 }
