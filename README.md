@@ -17,12 +17,12 @@ The project follows **SOLID principles** to ensure the codebase remains maintain
 | :--- | :--- | :--- |
 | **Player** | Locomotion, Input, & Interaction handling. | `PlayerController`, `PlayerLocomotion` |
 | **Stations** | Processing logic for cooking/chopping. | `BaseStationHandler`, `CookingStationHandler` |
-| **Orders** | Dynamic order generation and score calculation. | `OrderManager`, `ScoreManager` |
-| **UI Stack** | Screen management and player feedback. | `BaseScreenManager`, `GamePlayHUD` |
+| **Orders** | Dynamic order generation and score calculation. | `OrderManager` |
+| **UI Stack** | Screen management and player feedback. | `BaseScreenManager`, `BaseScreen` |
 
 ## ⚙️ Setup & Installation
 1. Clone the repository: `git clone https://github.com/anvithaus02/SoloSousChef.git`
-2. Open the project in **Unity 2020.3+**.
+2. Open the project in **Unity 2021+**.
 3. Load the scene: `Scenes/MainGame`.
 4. Press **Play**.
 
