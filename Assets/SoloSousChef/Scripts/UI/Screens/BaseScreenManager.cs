@@ -13,7 +13,6 @@ namespace com.SoloSousChef.UI.Screens
 
         private void Awake()
         {
-            // Singleton pattern
             if (Instance != null && Instance != this)
             {
                 Destroy(gameObject);
@@ -27,13 +26,11 @@ namespace com.SoloSousChef.UI.Screens
 
         private void InitializeUIState()
         {
-            // Hide EVERY screen first (no animation, instant)
             foreach (var screen in allScreens)
             {
                 screen.Hide(false);
             }
 
-            // Show ONLY the Main Menu
             ShowScreen(ScreenType.MainMenuScreen, false);
         }
 
