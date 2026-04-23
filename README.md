@@ -2,6 +2,15 @@
 
 A modular, highly scalable 3D kitchen simulation built in Unity. This project demonstrates clean architecture, event-driven systems, and data-driven design patterns suitable for a professional production environment.
 
+## 📺 Gameplay Demo
+
+
+
+
+
+| Preview | Description |
+| :--- | :--- |
+| <video src="https://github.com/user-attachments/assets/55e94fe3-db53-4d92-a60a-8925b8a2fa09" width="300" controls></video> | **Core Loop:** Managing order chits using a modular UI system and ScriptableObject-driven ingredient data. |
 
 ## 🛠 Technical Architecture
 The project follows **SOLID principles** to ensure the codebase remains maintainable and extendable:
